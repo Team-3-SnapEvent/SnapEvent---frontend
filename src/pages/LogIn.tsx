@@ -2,7 +2,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import { Button } from "../stories/Button";
 import useOpenModal from "../utils/useOpenModal";
-import isLoggedIn from "../recoil/atoms";
+//import isLoggedIn from "../recoil/atoms";
 import Modal from "../stories/Modal";
 import logIn from "../apis/logIn";
 import { useRecoilState } from "recoil";
@@ -10,7 +10,7 @@ import { useRecoilState } from "recoil";
 const LogIn = () => {
   const { isOpenModal, clickModal, closeModal } = useOpenModal();
   const [isJoin, setIsJoin] = useState(false);
-  const [isLogIn, setIsLogIn] = useRecoilState(isLoggedIn);
+  //const [isLogIn, setIsLogIn] = useRecoilState(isLoggedIn);
 
   return (
     <Login>
