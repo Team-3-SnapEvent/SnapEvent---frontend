@@ -2,62 +2,83 @@ import { useState } from "react";
 import styled from "styled-components";
 import { Button } from "../stories/Button";
 import useOpenModal from "../utils/useOpenModal";
-//import isLoggedIn from "../recoil/atoms";
 import Modal from "../stories/Modal";
 import logIn from "../apis/logIn";
-import { useRecoilState } from "recoil";
 
 const LogIn = () => {
-  const { isOpenModal, clickModal, closeModal } = useOpenModal();
-  const [isJoin, setIsJoin] = useState(false);
-  //const [isLogIn, setIsLogIn] = useRecoilState(isLoggedIn);
+    const { isOpenModal, clickModal, closeModal } = useOpenModal();
+    const [isJoin, setIsJoin] = useState(false);
 
-  return (
-    <Login>
-      <H1>SnapEvent logo</H1>
-      <Div style={{ fontWeight: "bold", fontSize: "2.5rem" }}>Sign Up!</Div>
-      <Div>로그인하고, 스냅 이벤트의 다양한 서비스를 누려보세요!</Div>
-      <Button
-        primary={false}
-        label="회원가입"
-        onClick={() => {
-          setIsJoin(true);
-          clickModal();
-        }}
-      />
-      <Button
-        primary={true}
-        label="로그인"
-        onClick={() => {
-          setIsJoin(false);
-          clickModal();
-        }}
-      />
-      {isOpenModal && isJoin && <Modal title="Join In" onJoinIn={true} closeModal={closeModal} /*joinIn={}*/ />}
-      {isOpenModal && !isJoin && (
-        <Modal
-          title="Log In"
-          onLogIn={true}
-          closeModal={closeModal}
-          logIn={(logIn({ username: "sebin", userPassword: "qwer" }), setIsLoggedIn(true))}
-        />
-      )}
-    </Login>
-  );
+    return (
+        <LoginContainer>
+            <Logo>🔥 SnapEvent 🔥</Logo>
+            <Title>회원가입 또는 로그인하세요!</Title>
+            <Description>스냅 이벤트의 다양한 서비스를 이용해보세요.</Description>
+            <ButtonContainer>
+                <Button
+                    primary={false}
+                    label="회원가입"
+                    onClick={() => {
+                        setIsJoin(true);
+                        clickModal();
+                    }}
+                />
+                <Button
+                    primary={true}
+                    label="로그인"
+                    onClick={() => {
+                        setIsJoin(false);
+                        clickModal();
+                    }}
+                />
+            </ButtonContainer>
+            {isOpenModal && (
+                <Modal
+                    title={isJoin ? "Join In" : "Log In"}
+                    onClose={closeModal}
+                    onSubmit={data => {
+                        if (isJoin) {
+                            // 회원가입 처리
+                        } else {
+                            // 로그인 처리
+                            logIn({ username: data.username, userPassword: data.userPassword });
+                        }
+                    }}
+                    isJoin={isJoin}
+                />
+            )}
+        </LoginContainer>
+    );
 };
-const Login = styled.div`
-  width: 100%;
-  height: 100%;
-  justify-content: center;
-  align-items: center;
+
+const LoginContainer = styled.div`
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 `;
-const H1 = styled.h1`
-  color: black;
-  font-size: 4.5rem;
+
+const Logo = styled.h1`
+    font-size: 3rem;
+    margin-bottom: 1rem;
 `;
-const Div = styled.div`
-  color: black;
-  font-size: 1.5rem;
+
+const Title = styled.h2`
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+`;
+
+const Description = styled.p`
+  font-size: 1rem;
+  color: #777;
+  margin-bottom: 2rem;
+`;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  gap: 1rem;
 `;
 
 export default LogIn;

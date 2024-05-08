@@ -17,18 +17,18 @@ const NavBar = () => {
 };
 const Wrapper = styled.div`
   margin: 0;
-  width: 100vw;
+  width: 90vw;
   display: flex;
   justify-content: center;
   align-items: center;
 `;
 const Div = styled.div`
   margin: 1rem;
-  width: 92%;
+  width: 95%;
   height: 10%;
   display: flex;
-  background-color: #d9d9d9;
-  justify-content: space-between;
+  background-color: #FFBE98;
+  justify-content: space-around;
   align-items: center;
   align-self: center;
 `;

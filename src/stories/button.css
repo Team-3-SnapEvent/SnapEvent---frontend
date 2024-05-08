@@ -10,15 +10,15 @@
 }
 .storybook-button--primary {
   color: white;
-  background-color: #072f54;
+  background-color: #FF6F61;
   outline: solid;
-  outline-color: #072f54;
+  outline-color: #FF6F61;
 }
 .storybook-button--secondary {
-  color: #072f54;
+  color: #FF6F61;
   background-color: #ffffff;
   outline: solid;
-  outline-color: #072f54;
+  outline-color: #FF6F61;
 }
 .storybook-button--small {
   font-size: 12px;
