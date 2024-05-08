@@ -1,13 +1,11 @@
-import { useNavigate } from 'react-router-dom'
-import { Header } from '../stories/Header'
-import { Button } from '../stories/Button'
+import { Header } from "../stories/Header";
 
 const Board = () => {
   return (
     <div>
       <Header />
     </div>
-  )
-}
+  );
+};
 
-export default Board
+export default Board;
