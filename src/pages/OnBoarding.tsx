@@ -1,14 +1,11 @@
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { Header } from "../stories/Header";
-import getCrawlingData from "../apis/getCrawlingData";
 import ItemList from "../stories/ItemList/ItemList";
 import { Product } from "../stories/ItemList/ItemList";
 
 const OnBoarding = () => {
   const navigate = useNavigate();
-  const crawlingDataOliveYoung : Promise<any>  = await  getCrawlingData();
-  console.log(crawlingDataOliveYoung)
   return (
     <div>
       <Header
