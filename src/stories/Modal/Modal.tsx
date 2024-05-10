@@ -1,5 +1,4 @@
 import { Button } from "../Button/Button";
-import { useState } from "react";
 import "./modal.css";
 
 interface userData {
@@ -27,15 +26,15 @@ interface ModalProps {
 }
 
 const Modal = ({ title, onLogIn, closeModal, checkDuplication, logIn, joinIn }: ModalProps) => {
-  const [logInId, setLogInId] = useState("");
-  const [logInPassword, setLogInPassword] = useState("");
-  const [joinInId, setJoinInId] = useState("");
-  const [joinInPassword, setJoinInPassword] = useState("");
-  const [checkingPassword, setCheckingPassword] = useState("");
-  const userData: userData = {
-    id: `${logInId}`,
-    password: `${logInPassword}`,
-  };
+  //const [logInId, setLogInId] = useState("");
+  //const [logInPassword, setLogInPassword] = useState("");
+  //const [joinInId, setJoinInId] = useState("");
+  //const [joinInPassword, setJoinInPassword] = useState("");
+ // const [checkingPassword, setCheckingPassword] = useState("");
+ // const userData: userData = {
+  //  id: `${logInId}`,
+ //   password: `${logInPassword}`,
+ // };
   return (
     <div className="modal-wrapper">
       <div className="modal-background">
@@ -52,18 +51,12 @@ const Modal = ({ title, onLogIn, closeModal, checkDuplication, logIn, joinIn }: 
                   name="ID"
                   type="text"
                   id="ID"
-                  onChange={(e) => {
-                    setLogInId(e.target.value);
-                  }}
                 />
                 <label htmlFor="PASSWORD">PASSWORD</label>
                 <input
                   id="PASSWORD"
                   name="password"
                   type="text"
-                  onChange={(e) => {
-                    setJoinInPassword(e.target.value);
-                  }}
                 />
                 <Button label="로그인" onClick={logIn}></Button>
               </form>

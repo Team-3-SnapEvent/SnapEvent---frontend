@@ -1,6 +1,6 @@
 import { type Meta } from "@storybook/react";
 import { fn } from "@storybook/test";
-import { Modal } from "./Modal";
+import  Modal  from "./Modal";
 
 const meta = {
   title: "Example/Modal",

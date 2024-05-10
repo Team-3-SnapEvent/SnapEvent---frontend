@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { Button } from "../stories/Button/Button";
 import useOpenModal from "../utils/useOpenModal";
 import Modal from "../stories/Modal/Modal";
-import logIn from "../apis/logIn";
 
 const LogIn = () => {
     const { isOpenModal, clickModal, closeModal } = useOpenModal();
@@ -36,15 +35,7 @@ const LogIn = () => {
                 <Modal
                     title={isJoin ? "Join In" : "Log In"}
                     closeModal={closeModal}
-                    onSubmit={data => {
-                        if (isJoin) {
-                            // 회원가입 처리
-                        } else {
-                            // 로그인 처리
-                            logIn({ username: data.username, userPassword: data.userPassword });
-                        }
-                    }}
-                    isJoin={isJoin}
+                    onJoinIn={isJoin}
                 />
             )}
         </LoginContainer>
