@@ -1,8 +1,7 @@
 .storybook-header {
   width: 100%;
   font-family: "Nunito Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  border-bottom: 10px solid #FFBE98;
-  padding: 15px 1px;
+  border-bottom: 0.35rem solid #FFBE98;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -10,9 +9,9 @@
 
 .storybook-header h1 {
   font-weight: bold;
-  font-size: 1.5rem;
+  font-size: 2rem;
   line-height: 1;
-  margin: 6px 0 6px 10px;
+  margin: 0.3rem 0 0.3rem 1rem;
   display: inline-block;
   vertical-align: top;
 }

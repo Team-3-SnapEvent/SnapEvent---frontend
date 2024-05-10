@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import { Header } from "../stories/Header";
+import { Header } from "../stories/Header/Header";
 import { useNavigate } from "react-router-dom";
-import NavBar from "../stories/NavBar";
+import NavBar from "../stories/NavBar/NavBar";
 import ItemList, { Product } from "../stories/ItemList/ItemList";
 
 const Main = () => {

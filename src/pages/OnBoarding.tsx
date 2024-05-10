@@ -1,13 +1,64 @@
-import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { Header } from "../stories/Header";
-import ItemList from "../stories/ItemList/ItemList";
-import { Product } from "../stories/ItemList/ItemList";
+import { useNavigate } from "react-router-dom";
+import { Header } from "../stories/Header/Header";
+import { Button } from "../stories/Button/Button";
+import ItemList, { ItemListForInterPark , Product , InterPark } from "../stories/ItemList/ItemList";
+import { useEffect, useState } from "react";
+
+const VITE_API_URL_OLIVEYOUNG = "http://3.37.195.24/api/crawl/olive-young";
+const VITE_API_URL_INTERPARK = "http://3.37.195.24/api/crawl/interpark";
+const VITE_API_URL_SSF = "http://3.37.195.24/api/crawl/ssf-shop";
+const VITE_API_URL_EDIYA = "http://3.37.195.24/api/crawl/ediya-coffee";
 
 const OnBoarding = () => {
     const navigate = useNavigate();
+    const [isLoadingOliveYoung, setIsLoadingOliveYoung] = useState(true);
+    const [oliveYoungItem, setOliveYoungItem] = useState<Product[]>([]);
+    const [isLoadingInterPark, setIsLoadingInterPark] = useState(true);
+    const [interParkItem, setInterParkItem] = useState<InterPark[]>([]);
+    const [isLoadingSSF, setIsLoadingSSF] = useState(true);
+    const [SSFItem, setSSFItem] = useState<Product[]>([]);
+    const [isLoadingEdiya, setIsLoadingEdiya] = useState(true);
+    const [ediyaItem, setEdiyaItem] = useState<Product[]>([]);
 
-    return (
+    useEffect(()=>{
+        (async () => {
+            const responseOliveYoung = await fetch(VITE_API_URL_OLIVEYOUNG);
+            const responseInterPark = await fetch(VITE_API_URL_INTERPARK);
+            const responseSSF = await fetch(VITE_API_URL_SSF);
+            const responseEdiya = await fetch(VITE_API_URL_EDIYA);
+
+            if(! responseOliveYoung.ok){
+                throw new Error ('API 호출 실패' + responseOliveYoung.statusText);
+            }
+            if(! responseInterPark.ok){
+                throw new Error ('API 호출 실패' + responseInterPark.statusText);
+            }
+            if(! responseSSF.ok){
+                throw new Error ('API 호출 실패' + responseSSF.statusText);
+            }
+            if(! responseEdiya.ok){
+                throw new Error ('API 호출 실패' + responseEdiya.statusText);
+            }
+            const jsonResponseOliveYoung = await responseOliveYoung.json()
+            setOliveYoungItem(jsonResponseOliveYoung);
+            setIsLoadingOliveYoung(false);
+
+            const jsonResponseInterPark = await responseInterPark.json();
+            setInterParkItem(jsonResponseInterPark);
+            setIsLoadingInterPark(false);
+
+            const jsonResponseSSF = await responseSSF.json();
+            setSSFItem(jsonResponseSSF);
+            setIsLoadingSSF(false);
+
+            const jsonResponseEdiya = await responseEdiya.json();
+            setEdiyaItem(jsonResponseEdiya);
+            setIsLoadingEdiya(false);
+        })();
+    },[]);
+
+     return ( 
         <Container>
             <Header
                 onLogin={() => {
@@ -15,100 +66,20 @@ const OnBoarding = () => {
                 }}
             />
             <Content>
-                <Heading>구독할 상품을 골라 주세요!</Heading>
-                <Categories>
-                    <Category>
-                        <CategoryImage src="/ex1.jpg" />
-                        <CategoryDescription>
-                            <CategoryTitle>화장품</CategoryTitle>
-                            <CategoryText>사진이 더 들어가도 괜찮을거같기도</CategoryText>
-                            <CategoryText>크롤링 내용</CategoryText>
-                            <CategoryText>크롤링 내용</CategoryText>
-                            <CategoryText>크롤링 내용</CategoryText>
-                            <CategoryText>크롤링 내용</CategoryText>
-                            <ActionButtons>
-                                <Button onClick={() => {/* 알림 설정 */}}>알림 설정</Button>
-                                <CheckboxContainer>
-                                    <Checkbox type="checkbox" id="subscribe-cosmetics" name="subscribe-cosmetics" />
-                                    <Label htmlFor="subscribe-cosmetics">구독하기</Label>
-                                </CheckboxContainer>
-                            </ActionButtons>
-                        </CategoryDescription>
-                    </Category>
-                    <Category>
-                        <CategoryImage src="/ex2.jpg" />
-                        <CategoryDescription>
-                            <CategoryTitle>카페</CategoryTitle>
-                            <CategoryText>늘려서 한줄에 카드 2장?</CategoryText>
-                            <CategoryText>크롤링 내용</CategoryText>
-                            <CategoryText>크롤링 내용</CategoryText>
-                            <CategoryText>크롤링 내용</CategoryText>
-                            <CategoryText>크롤링 내용</CategoryText>
-                            <ActionButtons>
-                                <Button onClick={() => {/* 알림 설정 */}}>알림 설정</Button>
-                                <CheckboxContainer>
-                                    <Checkbox type="checkbox" id="subscribe-cafe" name="subscribe-cafe" />
-                                    <Label htmlFor="subscribe-cafe">구독하기</Label>
-                                </CheckboxContainer>
-                            </ActionButtons>
-                        </CategoryDescription>
-                    </Category>
-                    <Category>
-                        <CategoryImage src="/ex3.jpg" />
-                        <CategoryDescription>
-                            <CategoryTitle>공연/티켓</CategoryTitle>
-                            <CategoryText>크롤링 내용</CategoryText>
-                            <CategoryText>크롤링 내용</CategoryText>
-                            <CategoryText>크롤링 내용</CategoryText>
-                            <CategoryText>크롤링 내용</CategoryText>
-                            <CategoryText>크롤링 내용</CategoryText>
-                            <ActionButtons>
-                                <Button onClick={() => {/* 알림 설정 */}}>알림 설정</Button>
-                                <CheckboxContainer>
-                                    <Checkbox type="checkbox" id="subscribe-ticket" name="subscribe-ticket" />
-                                    <Label htmlFor="subscribe-ticket">구독하기</Label>
-                                </CheckboxContainer>
-                            </ActionButtons>
-                        </CategoryDescription>
-                    </Category>
-                    <Category>
-                        <CategoryImage src="/ex4.jpg" />
-                        <CategoryDescription>
-                            <CategoryTitle>의류</CategoryTitle>
-                            <CategoryText>크롤링 내용</CategoryText>
-                            <CategoryText>크롤링 내용</CategoryText>
-                            <CategoryText>크롤링 내용</CategoryText>
-                            <CategoryText>크롤링 내용</CategoryText>
-                            <CategoryText>크롤링 내용</CategoryText>
-                            <ActionButtons>
-                                <Button onClick={() => {/* 알림 설정 */}}>알림 설정</Button>
-                                <CheckboxContainer>
-                                    <Checkbox type="checkbox" id="subscribe-clothes" name="subscribe-clothes" />
-                                    <Label htmlFor="subscribe-clothes">구독하기</Label>
-                                </CheckboxContainer>
-                            </ActionButtons>
-                        </CategoryDescription>
-                    </Category>
-                    <Category>
-                        <CategoryImage src="/ex4.jpg" />
-                        <CategoryDescription>
-                            <CategoryTitle>추가?</CategoryTitle>
-                            <CategoryText>크롤링 내용</CategoryText>
-                            <CategoryText>크롤링 내용</CategoryText>
-                            <CategoryText>크롤링 내용</CategoryText>
-                            <CategoryText>크롤링 내용</CategoryText>
-                            <CategoryText>크롤링 내용</CategoryText>
-                            <ActionButtons>
-                                <Button onClick={() => {/* 알림 설정 */}}>알림 설정</Button>
-                                <CheckboxContainer>
-                                    <Checkbox type="checkbox" id="subscribe-x" name="subscribe-x" />
-                                    <Label htmlFor="subscribe-x">구독하기</Label>
-                                </CheckboxContainer>
-                            </ActionButtons>
-                        </CategoryDescription>
-                    </Category>
-                </Categories>
-                <SubscribeButton onClick={() => {/* 구독하기 */}}>구독하기</SubscribeButton>
+                <Title>구독할 이벤트를 골라 주세요!</Title>
+                <Items>
+                    <Category> 화장품 </Category>
+                    <ItemWrapper>{isLoadingOliveYoung ? <div> ⚠ 로딩 중 ... ⚠ </div>: oliveYoungItem.map((it)=>(<ItemList {...it} />))}</ItemWrapper>
+                    <Category> 공연/티켓 </Category>
+                    <ItemWrapper>{isLoadingInterPark ? <div> ⚠ 로딩 중 ... ⚠ </div>: interParkItem.map((it)=>(<ItemListForInterPark {...it} />))}</ItemWrapper>
+                    <Category> 의류 </Category>
+                    <ItemWrapper>{isLoadingSSF ? <div> ⚠ 로딩 중 ... ⚠ </div>: SSFItem.map((it)=>(<ItemList {...it} />))}</ItemWrapper>
+                    <Category> 카페 </Category>
+                    <ItemWrapper>{isLoadingEdiya ? <div> ⚠ 로딩 중 ... ⚠ </div>: ediyaItem.map((it)=>(<ItemList {...it} />))}</ItemWrapper>
+                </Items>
+                <ButtonWrapper>
+                    <Button primary={true} size="large" label="구독하기" />
+                </ButtonWrapper>
             </Content>
         </Container>
     );
@@ -116,107 +87,44 @@ const OnBoarding = () => {
 
 const Container = styled.div`
     width: 100%;
-    padding: 2rem;
+    padding: 3rem;
 `;
 
 const Content = styled.div`
     margin-top: 3rem;
 `;
 
-const Heading = styled.h1`
+const Title = styled.h1`
     color: #333;
-    font-size: 2rem;
+    font-size: 2.4rem;
     font-weight: bold;
     text-align: center;
 `;
 
-const Categories = styled.div`
+const Items = styled.div`
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
+    flex-wrap: nowrap;
     justify-content: center;
     margin-top: 2rem;
 `;
-
-const Category = styled.div`
-    width: calc(25% - 2rem);
-    margin: 1rem;
-    border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-`;
-
-const CategoryImage = styled.img`
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-`;
-
-const CategoryDescription = styled.div`
-    padding: 1rem;
-`;
-
-const CategoryTitle = styled.h2`
-    color: #333;
-    font-size: 1.5rem;
-    font-weight: bold;
-`;
-
-const CategoryText = styled.p`
-    color: #555;
-    font-size: 1rem;
-`;
-
-const ActionButtons = styled.div`
+const Category = styled.h2`
+    color:#333;
+    font-size: 2rem;
+    font-weight: bolder;
+    text-align : start;
+`
+const ItemWrapper = styled.div`
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    overflow-x: scroll;
+`
+const ButtonWrapper = styled.div`
     display: flex;
     justify-content: center;
-    margin-top: 1rem;
-`;
-
-const Button = styled.button`
-    padding: 0.5rem 1rem;
-    background-color: #F08080;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    margin-right: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-
-    &:hover {
-        background-color: #555;
-    }
-`;
-
-const CheckboxContainer = styled.div`
-    display: flex;
     align-items: center;
-`;
-
-const Checkbox = styled.input`
-    margin-right: 0.5rem;
-`;
-
-const Label = styled.label`
-    font-size: 0.9rem;
-`;
-
-const SubscribeButton = styled.button`
-    display: block;
-    margin: 2rem auto;
-    padding: 1rem 5rem;
-    background-color: #98C8FF;
-    outline: solid;
-    outline-color: #98C8FF;
-    color: #2858c7;
-    font-weight: bold;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-
-    &:hover {
-        background-color: #555;
-    }
-`;
+    margin: 1rem 1rem 1rem 1rem;
+`
 
 export default OnBoarding;

@@ -1,8 +1,8 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { Button } from "../stories/Button";
+import { Button } from "../stories/Button/Button";
 import useOpenModal from "../utils/useOpenModal";
-import Modal from "../stories/Modal";
+import Modal from "../stories/Modal/Modal";
 import logIn from "../apis/logIn";
 
 const LogIn = () => {
@@ -35,7 +35,7 @@ const LogIn = () => {
             {isOpenModal && (
                 <Modal
                     title={isJoin ? "Join In" : "Log In"}
-                    onClose={closeModal}
+                    closeModal={closeModal}
                     onSubmit={data => {
                         if (isJoin) {
                             // 회원가입 처리
@@ -52,12 +52,16 @@ const LogIn = () => {
 };
 
 const LoginContainer = styled.div`
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
+    margin: 0 auto;
+    padding: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    overflow-x: hidden;
+    overflow-y: hidden;
 `;
 
 const Logo = styled.h1`

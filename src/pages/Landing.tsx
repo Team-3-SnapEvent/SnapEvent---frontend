@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { Header } from "../stories/Header";
-import { Button } from "../stories/Button";
+import { Header } from "../stories/Header/Header";
+import { Button } from "../stories/Button/Button";
 
 const Landing = () => {
     const navigate = useNavigate();
@@ -53,13 +53,12 @@ const Container = styled.div`
 `;
 
 const Content = styled.div`
-    margin-top: 6rem;
+    margin-top: 5rem;
     text-align: center;
 `;
 
 const Image = styled.img`
     width: 80%;
-    max-width: 600px;
     height: auto;
     border-radius: 10px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);

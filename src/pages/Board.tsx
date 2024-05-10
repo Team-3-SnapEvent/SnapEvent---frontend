@@ -1,4 +1,4 @@
-import { Header } from "../stories/Header";
+import { Header } from "../stories/Header/Header";
 
 const Board = () => {
   return (

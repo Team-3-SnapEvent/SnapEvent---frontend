@@ -1,4 +1,4 @@
-import { Button } from "./Button";
+import { Button } from "../Button/Button";
 import "./header.css";
 
 interface User {
@@ -15,17 +15,17 @@ export const Header = ({ user, onLogin, onLogout }: HeaderProps) => (
   <header>
     <div className="storybook-header">
       <div>
-        <h1>SnapEvent Logo</h1>
+        <h1>SnapEvent</h1>
       </div>
       <div>
         {user ? (
           <>
             <span className="welcome">마이페이지</span>
-            <Button size="small" onClick={onLogout} label="Log out" />
+            <Button size="large" onClick={onLogout} label="Log out" />
           </>
         ) : (
           <>
-            <Button primary size="small" onClick={onLogin} label="Log In" />
+            <Button primary size="large" onClick={onLogin} label="Log In" />
           </>
         )}
       </div>
