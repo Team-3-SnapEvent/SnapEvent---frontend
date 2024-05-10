@@ -106,6 +106,7 @@ const Main = () => {
                                 <BrandCard key={brand.title}>
                                     <BrandImage src={brand.image} alt={brand.title} />
                                     <ItemList
+                                        image ={brand.image}
                                         title={brand.title}
                                         dateRange={brand.dateRange}
                                         href={brand.href}
@@ -128,6 +129,7 @@ const Main = () => {
                                 <BrandCard key={brand.title}>
                                     <BrandImage src={brand.image} alt={brand.title} />
                                     <ItemList
+                                        image ={brand.image}
                                         title={brand.title}
                                         dateRange={brand.dateRange}
                                         href={brand.href}

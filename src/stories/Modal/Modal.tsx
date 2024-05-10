@@ -15,7 +15,7 @@ interface ModalProps {
   onLogIn?: boolean;
   onJoinIn?: boolean;
   closeModal?: () => void;
-  logIn?: (userdata: userData) => Promise<Response>;
+  logIn?: () => void;
   joinIn?: () => void;
   checkDuplication?: () => void;
   deleteFollowing?: () => void;
@@ -65,7 +65,7 @@ const Modal = ({ title, onLogIn, closeModal, checkDuplication, logIn, joinIn }: 
                     setJoinInPassword(e.target.value);
                   }}
                 />
-                <Button label="로그인" onClick={logIn(userData)}></Button>
+                <Button label="로그인" onClick={logIn}></Button>
               </form>
             </>
           ) : (
