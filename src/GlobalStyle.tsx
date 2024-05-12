@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components'
+import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyle = createGlobalStyle`
   :root {
@@ -8,4 +8,4 @@ export const GlobalStyle = createGlobalStyle`
     align-items: center;
     justify-content: center;
   }
-`
+`;

@@ -1,83 +1,164 @@
-import { Button } from "../Button/Button";
-import "./modal.css";
+import styled from "styled-components";
 
-interface userData {
-  id: string;
-  password: string;
-  nickname?: string;
-}
+import { useState } from "react";
+import { Button } from "../Button/Button";
+import { useNavigate } from "react-router-dom";
+/*
+interface userData{
+  id: string,
+  password: string,
+  nickname?: string
+}*/
 
 interface ModalProps {
   title: string;
-  user?: userData;
-  alert?: string;
   onLogIn?: boolean;
-  onJoinIn?: boolean;
-  closeModal?: () => void;
-  logIn?: () => void;
-  joinIn?: () => void;
+  closeModal: () => void;
+  logIn?: () => void;//(userData: userData) => Promise<Response>; 
+  joinIn?: () => void; //(userData: userData) => Promise<Response>;
   checkDuplication?: () => void;
-  deleteFollowing?: () => void;
-  deleteSubscribing?: () => void;
-  fixAlarming?: () => void;
-  deleteAlarming?: () => void;
-  fixPersonalInfo?: () => void;
-  withdrawMembership?: () => void;
 }
 
-const Modal = ({ title, onLogIn, closeModal, checkDuplication, logIn, joinIn }: ModalProps) => {
-  //const [logInId, setLogInId] = useState("");
-  //const [logInPassword, setLogInPassword] = useState("");
-  //const [joinInId, setJoinInId] = useState("");
-  //const [joinInPassword, setJoinInPassword] = useState("");
- // const [checkingPassword, setCheckingPassword] = useState("");
- // const userData: userData = {
-  //  id: `${logInId}`,
- //   password: `${logInPassword}`,
- // };
+const Modal = ({ title, onLogIn, closeModal, logIn, joinIn, checkDuplication }: ModalProps) => {
+  const navigate = useNavigate();
+  const [logInId, setLogInId] = useState("");
+  const [logInPassword, setLogInPassword] = useState("");
+  const [joinInId, setJoinInId] = useState("");
+  const [joinInPassword, setJoinInPassword] = useState("");
+  const [checkPassword, setCheckPassword] = useState("");
+  const [nickname,setNickname] = useState('');
+  console.log(logInId);
+  console.log(logInPassword);
+  console.log(joinInId);
+  console.log(nickname);
+ /*
+  const logInData: userData = {
+    id: `${logInId}`,
+    password: `${logInPassword}`
+  };
+
+  const joinInData: userData = {
+    id: `${joinInId}`,
+    password: `${joinInPassword}`,
+    nickname: `${nickname}`
+  };
+  */
   return (
-    <div className="modal-wrapper">
-      <div className="modal-background">
-        <div className="modal-container">
-          <h1>{title}</h1>
-          <h1 className="exit" onClick={closeModal}>
-            X
-          </h1>
+    <ModalWrapper>
+      <ModalBackground>
+        <ModalContainer>
+          <TitleWrapper>
+            <Title>{title}</Title>
+            <Title onClick={closeModal}> ❌ </Title>
+          </TitleWrapper>
           {onLogIn ? (
             <>
-              <form>
-                <label htmlFor="ID">ID</label>
-                <input
-                  name="ID"
-                  type="text"
-                  id="ID"
-                />
-                <label htmlFor="PASSWORD">PASSWORD</label>
-                <input
-                  id="PASSWORD"
-                  name="password"
-                  type="text"
-                />
-                <Button label="로그인" onClick={logIn}></Button>
-              </form>
+              <Form>
+                <InputWrapper>
+                  <Label htmlFor="ID">ID</Label>
+                  <Input name="ID" type="text" id="ID" onChange={(e)=>{setLogInId(e.target.value);}} />
+                </InputWrapper>
+                <InputWrapper>
+                  <Label htmlFor="PASSWORD">PASSWORD</Label>
+                  <Input id="PASSWORD" name="password" type="text" onChange={(e)=>{setLogInPassword(e.target.value)}} />
+                </InputWrapper>
+                <Button primary={true} size="medium" label="로그인" onClick={()=>{logIn; setLogInId(''); setLogInPassword(''); navigate('/main');}} />
+              </Form>
             </>
           ) : (
             <>
-              <form>
-                <label htmlFor="JOINID">ID</label>
-                <input id="JOINID" name="joinId" type="text" />
-                <label htmlFor="JOINDPASSWORD">PASSWORD</label>
-                <input id="JOINPASSWORD" name="joinPassword" type="text" />
-                <label htmlFor="NICKNAME">닉네임</label>
-                <input id="NICKNAME" name="joinNickname" type="text" />
-                <Button label="중복 확인" onClick={checkDuplication} />
-                <Button label="회원가입" onClick={joinIn} />
-              </form>
+              <Form>
+                <InputWrapper>
+                  <Label htmlFor="JOINID">ID</Label>
+                  <Input id="JOINID" name="joinId" type="text" onChange={(e)=>{setJoinInId(e.target.value)}} />
+                </InputWrapper>
+                <InputWrapper>
+                  <Label htmlFor="JOINPASSWORD">PASSWORD</Label>
+                  <Input id="JOINPASSWORD" name="joinPassword" type="text" onChange={(e)=>{setJoinInPassword(e.target.value)}} />
+                </InputWrapper>
+                <InputWrapper>
+                  <Label htmlFor="CHECKPASSWORD"> CHECK PASSWORD</Label>
+                  <Input id="CHECKPASSWORD" name="checkPassword" type="text" onChange={(e)=>{setCheckPassword(e.target.value)}} />
+                  {checkPassword !== joinInPassword && <div>입력한 비밀번호가 다릅니다.</div> }
+                </InputWrapper>
+                <InputWrapper>
+                  <Label htmlFor="NICKNAME">닉네임</Label>
+                  <Input id="NICKNAME" name="joinNickname" type="text" onChange={(e)=>{setNickname(e.target.value)}} />
+                  <Button primary={false} size="small" label="중복 확인" onClick={checkDuplication} />
+                </InputWrapper>
+                <Button primary={true} label="회원가입" size="medium" onClick={()=>{joinIn;setJoinInId('');setJoinInPassword('');navigate('/main')}}/>
+              </Form>
             </>
           )}
-        </div>
-      </div>
-    </div>
+        </ModalContainer>
+      </ModalBackground>
+    </ModalWrapper>
   );
 };
+
+const ModalWrapper = styled.div`
+  width:100vw;
+  height: 100vh;
+`;
+const ModalBackground = styled.div`
+  background-color: rgba(0, 0, 0, 0.6);
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const ModalContainer = styled.div`
+  background-color: white;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+  padding: 3rem;
+  border: 1px solid var(--color-white);
+  position: fixed;
+  width: 25%;
+  min-width: 270px;
+  height: 65%;
+  min-height: 600;
+`;
+const TitleWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+`
+
+const Title = styled.h1`
+  font-size: 2.5rem;
+  color: #333;
+  cursor: pointer;
+`;
+
+const Form = styled.form`
+  display: flex;
+  flex-direction : column;
+  height: calc(100% - 2rem);
+`;
+
+const InputWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 1rem 0 1rem 0;
+`;
+
+const Label = styled.label`
+  color: #333;
+`
+
+const Input = styled.input`
+  width: calc(80% - 1rem);
+  height: 2rem;
+  border-radius: 5px;
+  border-color: #7a7a7a;
+`
 export default Modal;

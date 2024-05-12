@@ -21,11 +21,11 @@ export const Header = ({ user, onLogin, onLogout }: HeaderProps) => (
         {user ? (
           <>
             <span className="welcome">마이페이지</span>
-            <Button size="large" onClick={onLogout} label="Log out" />
+            <Button size="medium" onClick={onLogout} label="Log out" />
           </>
         ) : (
           <>
-            <Button primary size="large" onClick={onLogin} label="Log In" />
+            <Button primary size="medium" onClick={onLogin} label="Log In" />
           </>
         )}
       </div>

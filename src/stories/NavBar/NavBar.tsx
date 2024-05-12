@@ -27,7 +27,7 @@ const Div = styled.div`
   width: 95%;
   height: 10%;
   display: flex;
-  background-color: #FFBE98;
+  background-color: #ffbe98;
   justify-content: space-around;
   align-items: center;
   align-self: center;
