@@ -5,10 +5,10 @@ import { Button } from "../stories/Button/Button";
 import ItemList, { ItemListForInterPark, Product, InterPark } from "../stories/ItemList/ItemList";
 import { useEffect, useState } from "react";
 
-const VITE_API_URL_OLIVEYOUNG = "https://3.37.195.24/api/crawl/olive-young";
-const VITE_API_URL_INTERPARK = "https://3.37.195.24/api/crawl/interpark";
-const VITE_API_URL_SSF = "https://3.37.195.24/api/crawl/ssf-shop";
-const VITE_API_URL_EDIYA = "https://3.37.195.24/api/crawl/ediya-coffee";
+const VITE_API_URL_OLIVEYOUNG = "https://snapevent.site/api/crawl/olive-young";
+const VITE_API_URL_INTERPARK = "https://snapevent.site/api/crawl/interpark";
+const VITE_API_URL_SSF = "https://snapevent.site/api/crawl/ssf-shop";
+const VITE_API_URL_EDIYA = "https://snapevent.site/api/crawl/ediya-coffee";
 
 const OnBoarding = () => {
   const navigate = useNavigate();

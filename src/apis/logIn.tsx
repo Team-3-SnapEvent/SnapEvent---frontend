@@ -1,4 +1,4 @@
-const APIURI = "http://3.37.195.24/members/login";
+const APIURI = "http://snapevent.site/members/login";
 
 interface LogInData {
   username: string;
