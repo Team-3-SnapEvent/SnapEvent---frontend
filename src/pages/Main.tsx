@@ -3,6 +3,7 @@ import { Header } from "../stories/Header/Header";
 import { useNavigate } from "react-router-dom";
 import NavBar from "../stories/NavBar/NavBar";
 import ItemList, { Product } from "../stories/ItemList/ItemList";
+import Board from "../stories/Board/Board";
 
 const Main = () => {
   const navigate = useNavigate();
@@ -76,19 +77,9 @@ const Main = () => {
     },
   ];
 
-  // 더미 글 데이터
-  const posts = [
-    { id: 1, title: "첫 번째 게시글" },
-    { id: 2, title: "두 번째 게시글" },
-    { id: 3, title: "세 번째 게시글" },
-    { id: 4, title: "네 번째 게시글" },
-    { id: 5, title: "다섯 번째 게시글" },
-  ];
-
   return (
     <MainContainer>
       <Header
-        user={{ name: "sebin" }}
         onLogin={() => {
           navigate("/login");
         }}
@@ -143,14 +134,7 @@ const Main = () => {
           )}
         </BrandList>
       </Section>
-      <BoardHeader>
-        <h2>게시판</h2>
-      </BoardHeader>
-      <PostList>
-        {posts.map((post) => (
-          <PostItem key={post.id}>{post.title}</PostItem>
-        ))}
-      </PostList>
+      <Board />
     </MainContainer>
   );
 };
@@ -204,35 +188,6 @@ const NoBrandMessage = styled.p`
   font-size: 1.2rem;
   color: black;
   margin-left: 3.7rem;
-`;
-
-const BoardHeader = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-bottom: 5px solid #ffbe98;
-  padding: 1rem;
-  margin-left: 4rem;
-  margin-right: 2rem;
-  margin-bottom: 1rem;
-  h2 {
-    font-size: 1.8rem;
-    color: #333;
-    margin: 3rem;
-  }
-`;
-
-const PostList = styled.div`
-  margin: 2rem auto;
-  max-width: 1000px;
-`;
-
-const PostItem = styled.div`
-  padding: 1rem;
-  border-bottom: 1px solid #ccc;
-  &:last-child {
-    border-bottom: none;
-  }
 `;
 
 export default Main;

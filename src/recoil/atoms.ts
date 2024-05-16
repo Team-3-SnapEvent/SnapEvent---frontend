@@ -1,8 +1,8 @@
-import { atom } from 'recoil'
+import { atom } from "recoil";
 
 const isLoggedIn = atom<boolean>({
-  key: 'isLoggedIn',
-  default: false
+  key: "isLoggedIn",
+  default: false,
 });
 
 export default isLoggedIn;

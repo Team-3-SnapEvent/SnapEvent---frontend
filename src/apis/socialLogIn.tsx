@@ -1,13 +1,13 @@
-const VITE_API_URL_SOCIAL_GOOGLE = 'https://snapevent.site/oauth2/authorization/google';
-const VITE_API_URL_SOCIAL_NAVER = 'https://snapevent.site/oauth2/authorization/naver';
-const VITE_API_URL_SOCIAL_KAKAO = 'https://snapevent.site/oauth2/authorization/kakao';
-type fetchData= () => void;
-const socialLogIn : fetchData =  () => {
-    fetch(VITE_API_URL_SOCIAL_GOOGLE);
+const VITE_API_URL_SOCIAL_GOOGLE = "https://snapevent.site/oauth2/authorization/google";
+const VITE_API_URL_SOCIAL_NAVER = "https://snapevent.site/oauth2/authorization/naver";
+const VITE_API_URL_SOCIAL_KAKAO = "https://snapevent.site/oauth2/authorization/kakao";
+type fetchData = () => void;
+const socialLogIn: fetchData = () => {
+  fetch(VITE_API_URL_SOCIAL_GOOGLE).then((res) => console.log(res));
 };
 
-export const socialKakao : fetchData = async () => {
-    /*const response = await fetch(VITE_API_URL_SOCIAL_KAKAO);
+export const socialKakao: fetchData = async () => {
+  /*const response = await fetch(VITE_API_URL_SOCIAL_KAKAO);
     try {
         if (response.ok) {
             const data = await response.json(); 
@@ -18,11 +18,11 @@ export const socialKakao : fetchData = async () => {
     } catch (error) {
         console.log(error);
     }*/
-    fetch(VITE_API_URL_SOCIAL_KAKAO);
-}; 
+  fetch(VITE_API_URL_SOCIAL_KAKAO).then((res) => console.log(res));
+};
 
-export const socialNaver : fetchData = async () => {
-    /*const response = await fetch(VITE_API_URL_SOCIAL_NAVER);
+export const socialNaver: fetchData = async () => {
+  /*const response = await fetch(VITE_API_URL_SOCIAL_NAVER);
     try {
         if (response.ok) {
             const data = await response.json(); 
@@ -33,6 +33,6 @@ export const socialNaver : fetchData = async () => {
     } catch (error) {
         console.log(error);
     }*/
-    fetch(VITE_API_URL_SOCIAL_NAVER);
-}; 
+  fetch(VITE_API_URL_SOCIAL_NAVER).then((res) => console.log(res));
+};
 export default socialLogIn;

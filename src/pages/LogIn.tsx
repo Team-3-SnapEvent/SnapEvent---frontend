@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Button } from "../stories/Button/Button";
 import useOpenModal from "../utils/useOpenModal";
 import Modal from "../stories/Modal/Modal";
-import socialLogIn,{socialKakao, socialNaver} from "../apis/socialLogIn";
+import socialLogIn, { socialKakao, socialNaver } from "../apis/socialLogIn";
 
 const LogIn = () => {
   const { isOpenModal, clickModal, closeModal } = useOpenModal();
@@ -36,9 +36,9 @@ const LogIn = () => {
       </ButtonContainer>
       <Line />
       <ImageWrapper>
-        <Image src='/kakao.png' onClick={socialKakao} />
-        <Image src='/naver.svg' onClick={socialNaver}/>
-        <Image src='/google.png' onClick={socialLogIn} />
+        <Image src="/kakao.png" onClick={socialKakao} />
+        <Image src="/naver.svg" onClick={socialNaver} />
+        <Image src="/google.png" onClick={socialLogIn} />
       </ImageWrapper>
       {isOpenModal && <Modal title={isJoin ? "Join In" : "Log In"} closeModal={closeModal} onLogIn={!isJoin} />}
     </LoginContainer>
@@ -82,15 +82,15 @@ const Line = styled.hr`
   margin-top: 2rem;
   border: solid 0.7px #777;
   width: 370px;
-`
+`;
 const ImageWrapper = styled.div`
   display: flex;
   flex-direction: row;
-`
+`;
 const Image = styled.img`
   width: 2rem;
   height: 2rem;
   border-radius: 5px;
   margin: 0.5rem 3rem 0.5rem 3rem;
-`
+`;
 export default LogIn;

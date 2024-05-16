@@ -3,23 +3,18 @@ import styled from "styled-components";
 import { useState } from "react";
 import { Button } from "../Button/Button";
 import { useNavigate } from "react-router-dom";
-/*
-interface userData{
-  id: string,
-  password: string,
-  nickname?: string
-}*/
+import joinIn, { joinData } from "../../apis/joinIn";
+import logIn, { logInData } from "../../apis/logIn";
+
 
 interface ModalProps {
   title: string;
   onLogIn?: boolean;
   closeModal: () => void;
-  logIn?: () => void;//(userData: userData) => Promise<Response>; 
-  joinIn?: () => void; //(userData: userData) => Promise<Response>;
   checkDuplication?: () => void;
 }
 
-const Modal = ({ title, onLogIn, closeModal, logIn, joinIn, checkDuplication }: ModalProps) => {
+const Modal = ({ title, onLogIn, closeModal, checkDuplication }: ModalProps) => {
   const navigate = useNavigate();
   const [logInId, setLogInId] = useState("");
   const [logInPassword, setLogInPassword] = useState("");
@@ -31,18 +26,19 @@ const Modal = ({ title, onLogIn, closeModal, logIn, joinIn, checkDuplication }: 
   console.log(logInPassword);
   console.log(joinInId);
   console.log(nickname);
- /*
-  const logInData: userData = {
-    id: `${logInId}`,
-    password: `${logInPassword}`
+ 
+  const logInData: logInData = {
+    username: `${logInId}`,
+    userPassword: `${logInPassword}`
   };
 
-  const joinInData: userData = {
-    id: `${joinInId}`,
+  const joinInData: joinData = {
+    username: `${joinInId}`,
     password: `${joinInPassword}`,
+    checkPassword: `${checkPassword}`,
     nickname: `${nickname}`
   };
-  */
+  
   return (
     <ModalWrapper>
       <ModalBackground>
@@ -62,7 +58,7 @@ const Modal = ({ title, onLogIn, closeModal, logIn, joinIn, checkDuplication }: 
                   <Label htmlFor="PASSWORD">PASSWORD</Label>
                   <Input id="PASSWORD" name="password" type="text" onChange={(e)=>{setLogInPassword(e.target.value)}} />
                 </InputWrapper>
-                <Button primary={true} size="medium" label="로그인" onClick={()=>{logIn; setLogInId(''); setLogInPassword(''); navigate('/main');}} />
+                <Button primary={true} size="medium" label="로그인" onClick={()=>{logIn(logInData); setLogInId(''); setLogInPassword('');}} />
               </Form>
             </>
           ) : (
@@ -86,7 +82,7 @@ const Modal = ({ title, onLogIn, closeModal, logIn, joinIn, checkDuplication }: 
                   <Input id="NICKNAME" name="joinNickname" type="text" onChange={(e)=>{setNickname(e.target.value)}} />
                   <Button primary={false} size="small" label="중복 확인" onClick={checkDuplication} />
                 </InputWrapper>
-                <Button primary={true} label="회원가입" size="medium" onClick={()=>{joinIn;setJoinInId('');setJoinInPassword('');navigate('/main')}}/>
+                <Button primary={true} label="회원가입" size="medium" onClick={()=>{console.log(joinInData);joinIn(joinInData);setJoinInId('');setJoinInPassword('');setCheckPassword('');setNickname('');/*추후에 회원가입fullfilled되면 로그인까지 돼서 토큰 저장하는 과정 구현 */ navigate('main')}}/>
               </Form>
             </>
           )}

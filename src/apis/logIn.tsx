@@ -1,25 +1,25 @@
-const APIURI = "http://snapevent.site/members/login";
+const APIURI = "https://snapevent.site/api/members/login";
 
-interface LogInData {
+export interface logInData {
   username: string;
   userPassword: string;
 }
 
-const logIn = async (userdata: LogInData): Promise<any> => {
+type fetch = (userData: logInData) => void;
+
+const logIn: fetch = async (userData: logInData) => {
   try {
     const response = await fetch(APIURI, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(userdata),
+      body: JSON.stringify(userData),
     });
 
     if (response.ok) {
       const responseData = await response.json();
-      console.log("성공");
       console.log(responseData);
-      return responseData;
     } else {
       console.error("api 연결 실패.. :", response.status);
       throw new Error("API 호출 실패");
