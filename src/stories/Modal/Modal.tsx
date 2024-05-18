@@ -78,7 +78,7 @@ const Modal = ({ title, onLogIn, closeModal, checkDuplication }: ModalProps) => 
                   {checkPassword !== joinInPassword && <div>입력한 비밀번호가 다릅니다.</div> }
                 </InputWrapper>
                 <InputWrapper>
-                  <Label htmlFor="NICKNAME">닉네임</Label>
+                  <Label htmlFor="NICKNAME">NICKNAME</Label>
                   <Input id="NICKNAME" name="joinNickname" type="text" onChange={(e)=>{setNickname(e.target.value)}} />
                   <Button primary={false} size="small" label="중복 확인" onClick={checkDuplication} />
                 </InputWrapper>
@@ -148,11 +148,13 @@ const InputWrapper = styled.div`
 `;
 
 const Label = styled.label`
-  color: #333;
+  color: #333;\
+  white-space: nowrap;
+  margin-right: 1rem;
 `
 
 const Input = styled.input`
-  width: calc(80% - 1rem);
+  width: calc(60% - 1rem);
   height: 2rem;
   border-radius: 5px;
   border-color: #7a7a7a;
