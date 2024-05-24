@@ -68,13 +68,17 @@ const OnBoarding = () => {
       <Content>
         <Title>구독할 이벤트를 골라 주세요!</Title>
         <Items>
-          <Category onClick={() => {console.log('ehdwr')}}> 💄 화장품 💄 </Category>
+          <Category> 💄 화장품 💄 </Category>
           <CheckBoxContainer>
             <CheckBox type="checkbox" id="subscribe-cosmetics" name="subscribe-cosmetics" />
             <Label htmlFor="subscribe-cosmetics">Oliveyoung 구독하기</Label>
           </CheckBoxContainer>
           <ItemWrapper>
-            {isLoadingOliveYoung ? <div> ⚠ 로딩 중 ... ⚠ </div> : oliveYoungItem.map((it) => <ItemList key={it.title} {...it} />)}
+            {isLoadingOliveYoung ? (
+              <div> ⚠ 로딩 중 ... ⚠ </div>
+            ) : (
+              oliveYoungItem.map((it) => <ItemList key={it.title} {...it} />)
+            )}
           </ItemWrapper>
           <Category> 🎬 공연/티켓 🎤 </Category>
           <CheckBoxContainer>
@@ -102,7 +106,11 @@ const OnBoarding = () => {
             <Label htmlFor="subscribe-cosmetics">Ediya 구독하기</Label>
           </CheckBoxContainer>
           <ItemWrapper>
-            {isLoadingEdiya ? <div> ⚠ 로딩 중 ... ⚠ </div> : ediyaItem.map((it) => <ItemList key={it.title} {...it} />)}
+            {isLoadingEdiya ? (
+              <div> ⚠ 로딩 중 ... ⚠ </div>
+            ) : (
+              ediyaItem.map((it) => <ItemList key={it.title} {...it} />)
+            )}
           </ItemWrapper>
         </Items>
         <ButtonWrapper>

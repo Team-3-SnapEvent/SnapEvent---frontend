@@ -3,7 +3,7 @@ const VITE_API_URL_SOCIAL_NAVER = "https://snapevent.site/oauth2/authorization/n
 const VITE_API_URL_SOCIAL_KAKAO = "https://snapevent.site/oauth2/authorization/kakao";
 type fetchData = () => void;
 const socialLogIn: fetchData = () => {
-  fetch(VITE_API_URL_SOCIAL_GOOGLE).then((res) => console.log(res));
+  fetch(VITE_API_URL_SOCIAL_GOOGLE).then((res) => (window.location.href = res.url));
 };
 
 export const socialKakao: fetchData = async () => {
@@ -18,7 +18,7 @@ export const socialKakao: fetchData = async () => {
     } catch (error) {
         console.log(error);
     }*/
-  fetch(VITE_API_URL_SOCIAL_KAKAO).then((res) => console.log(res));
+  fetch(VITE_API_URL_SOCIAL_KAKAO).then((res) => (window.location.href = res.url));
 };
 
 export const socialNaver: fetchData = async () => {
@@ -33,6 +33,6 @@ export const socialNaver: fetchData = async () => {
     } catch (error) {
         console.log(error);
     }*/
-  fetch(VITE_API_URL_SOCIAL_NAVER).then((res) => console.log(res));
+  fetch(VITE_API_URL_SOCIAL_NAVER).then((res) => (window.location.href = res.url));
 };
 export default socialLogIn;
