@@ -35,11 +35,18 @@ const LogIn = () => {
         />
       </ButtonContainer>
       <Line />
-      <ImageWrapper>
-        <Image src="/kakao.png" onClick={socialKakao} />
-        <Image src="/naver.svg" onClick={socialNaver} />
-        <Image src="/google.png" onClick={socialLogIn} />
-      </ImageWrapper>
+      <KakaoWrapper onClick={socialKakao} >
+        <Image src="/kakao.png"/>
+        <SocialText>카카오로 로그인</SocialText>
+      </KakaoWrapper>
+      <NaverWrapper onClick={socialNaver} >
+        <Image src="/naver.svg" />
+        <SocialText>네이버로 로그인</SocialText>
+      </NaverWrapper>
+      <GoogleWrapper onClick={socialLogIn} >
+        <Image src="/google.png" />
+        <SocialText>구글로 로그인</SocialText>
+      </GoogleWrapper>
       {isOpenModal && <Modal title={isJoin ? "Join In" : "Log In"} closeModal={closeModal} onLogIn={!isJoin} />}
     </LoginContainer>
   );
@@ -83,14 +90,40 @@ const Line = styled.hr`
   border: solid 0.7px #777;
   width: 370px;
 `;
-const ImageWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
+const KakaoWrapper = styled.div`
+    display: flex;
+    flex-direction: row;
+    width: 20vw;
+    background-color: #FEE500;
+    border: 2px solid #FEE500; 
+    border-radius: 5px; 
+    margin-top: 0.5rem; 
+`;
+const SocialText = styled.p`
+  font-size: 0.95rem;
+  color: #300;
+`;
+const NaverWrapper = styled.div`
+    display: flex;
+    flex-direction: row;
+    width: 20vw;
+    background-color: #00C73C;
+    border: 2px solid #00C73C; 
+    border-radius: 5px; 
+    margin-top: 0.5rem; 
+`;
+const GoogleWrapper = styled.div`
+    display: flex;
+    flex-direction: row;
+    width: 20vw;
+    border: 2px solid #999999; 
+    border-radius: 5px; 
+    margin-top: 0.5rem; 
 `;
 const Image = styled.img`
   width: 2rem;
   height: 2rem;
   border-radius: 5px;
-  margin: 0.5rem 3rem 0.5rem 3rem;
+  margin: 0.5rem 3rem 0.5rem 1rem;
 `;
 export default LogIn;

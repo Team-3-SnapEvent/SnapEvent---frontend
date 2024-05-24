@@ -1,5 +1,5 @@
 import { type Meta } from "@storybook/react";
-import { fn } from "@storybook/test";
+// import { fn } from "@storybook/test";
 import Modal from "./Modal";
 
 const meta = {
@@ -10,8 +10,8 @@ const meta = {
     layout: "fullscreen",
   },
   args: {
-    logIn: fn(),
-    joinIn: fn(),
+    // logIn: fn(),
+    // joinIn: fn(),
   },
 } satisfies Meta<typeof Modal>;
 
