@@ -35,15 +35,15 @@ const LogIn = () => {
         />
       </ButtonContainer>
       <Line />
-      <KakaoWrapper onClick={socialKakao} >
-        <Image src="/kakao.png"/>
+      <KakaoWrapper onClick={socialKakao}>
+        <Image src="/kakao.png" />
         <SocialText>카카오로 로그인</SocialText>
       </KakaoWrapper>
-      <NaverWrapper onClick={socialNaver} >
+      <NaverWrapper onClick={socialNaver}>
         <Image src="/naver.svg" />
         <SocialText>네이버로 로그인</SocialText>
       </NaverWrapper>
-      <GoogleWrapper onClick={socialLogIn} >
+      <GoogleWrapper onClick={socialLogIn}>
         <Image src="/google.png" />
         <SocialText>구글로 로그인</SocialText>
       </GoogleWrapper>
@@ -90,40 +90,39 @@ const Line = styled.hr`
   border: solid 0.7px #777;
   width: 370px;
 `;
-const KakaoWrapper = styled.div`
-    display: flex;
-    flex-direction: row;
-    width: 20vw;
-    background-color: #FEE500;
-    border: 2px solid #FEE500; 
-    border-radius: 5px; 
-    margin-top: 0.5rem; 
+const Wrapper = styled.div`
+  display: flex;
+  align-items: center;
+  width: 240px;
+  height: 47px;
+  background-color: ${({ color }) => color || "#fff"};
+  border: 2px solid ${({ color }) => color || "#999"};
+  border-radius: 5px;
+  margin-top: 0.5rem;
+  position: relative;
+`;
+const KakaoWrapper = styled(Wrapper)`
+  background-color: #fee500;
+  border-color: #fee500;
 `;
 const SocialText = styled.p`
-  font-size: 0.95rem;
+  font-size: 15px;
+  font-family: "Nunito Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: #300;
+  margin-left: 30px;
 `;
-const NaverWrapper = styled.div`
-    display: flex;
-    flex-direction: row;
-    width: 20vw;
-    background-color: #00C73C;
-    border: 2px solid #00C73C; 
-    border-radius: 5px; 
-    margin-top: 0.5rem; 
+const NaverWrapper = styled(Wrapper)`
+  background-color: #00c73c;
+  border-color: #00c73c;
 `;
-const GoogleWrapper = styled.div`
-    display: flex;
-    flex-direction: row;
-    width: 20vw;
-    border: 2px solid #999999; 
-    border-radius: 5px; 
-    margin-top: 0.5rem; 
+
+const GoogleWrapper = styled(Wrapper)`
+  background-color: #ffffff;
+  border-color: #999999;
 `;
 const Image = styled.img`
-  width: 2rem;
-  height: 2rem;
+  width: 30px;
   border-radius: 5px;
-  margin: 0.5rem 3rem 0.5rem 1rem;
+  margin-left: 1vw;
 `;
 export default LogIn;
