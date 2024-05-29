@@ -6,11 +6,9 @@ import { interPark } from "../recoil/atoms";
 import { Header } from "../stories/Header/Header";
 import NavBar from "../stories/NavBar/NavBar";
 import { EventListForInterPark } from "../stories/EventList/EventList";
-
 const Cosmetic = () => {
   const navigate = useNavigate();
   const interpark = useRecoilValue<InterPark[]>(interPark);
-
   return (
     <CosmeticContainer>
       <Header

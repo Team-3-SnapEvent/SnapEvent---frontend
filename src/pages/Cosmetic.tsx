@@ -6,11 +6,9 @@ import { useRecoilValue } from "recoil";
 import { oliveYoung } from "../recoil/atoms";
 import { Product } from "../stories/ItemList/ItemList";
 import EventList from "../stories/EventList/EventList";
-
 const Cosmetic = () => {
   const navigate = useNavigate();
   const oliveyoung = useRecoilValue<Product[]>(oliveYoung);
-
   return (
     <CosmeticContainer>
       <Header

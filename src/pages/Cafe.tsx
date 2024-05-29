@@ -6,11 +6,9 @@ import { useRecoilValue } from "recoil";
 import { ediya } from "../recoil/atoms";
 import { Product } from "../stories/ItemList/ItemList";
 import EventList from "../stories/EventList/EventList";
-
 const Clothes = () => {
   const navigate = useNavigate();
   const Ediya = useRecoilValue<Product[]>(ediya);
-
   return (
     <CosmeticContainer>
       <Header

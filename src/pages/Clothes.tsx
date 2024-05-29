@@ -10,7 +10,6 @@ import EventList from "../stories/EventList/EventList";
 const Clothes = () => {
   const navigate = useNavigate();
   const SSF = useRecoilValue<Product[]>(ssf);
-
   return (
     <CosmeticContainer>
       <Header

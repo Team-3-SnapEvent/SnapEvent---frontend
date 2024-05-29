@@ -73,7 +73,7 @@ const useAuth = () => {
       .post("/api/members/reissue")
       .then(onLogInSuccess)
       .then(() => console.log("토큰재발급 완료"))
-      .catch((error) => console.log(error));
+      .catch((error) => console.log("토큰 재발급 오류" + error));
   }, [onLogInSuccess]);
 
   return { logIn, onSilentRefresh };
