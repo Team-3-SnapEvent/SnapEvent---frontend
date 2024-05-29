@@ -5,38 +5,19 @@ import NavBar from "../stories/NavBar/NavBar";
 import ItemList, { Product } from "../stories/ItemList/ItemList";
 import Board from "../stories/Board/Board";
 
+import isLoggedIn, { accessToken } from "../recoil/atoms";
+//import { useEffect } from "react";
+//import GetSubscribing from "../apis/getSubscribing";
+//import getBoardingList from "../apis/getBoardingList";
+import useSubscribing from "../apis/getSubscribing";
+import useTokenParam from "../utils/useTokenParam";
+
 const Main = () => {
   const navigate = useNavigate();
-  const dummyData: Product[] = [
-    {
-      title: "oliveyoung",
-      description: "예시 데이터입니다",
-      dateRange: { startDate: "2024-01-12", endDate: "2024-04-25" },
-      image: "brand1.jpg", // 이미지 경로 추가
-      href: "1234",
-    },
-    {
-      title: "ediya",
-      description: "예시 데이터입니다",
-      dateRange: { startDate: "2024-01-12", endDate: "2024-04-25" },
-      image: "brand2.jpg", // 이미지 경로 추가
-      href: "1234",
-    },
-    {
-      title: "ssf",
-      description: "예시 데이터입니다",
-      dateRange: { startDate: "2024-01-12", endDate: "2024-04-25" },
-      image: "brand3.jpg", // 이미지 경로 추가
-      href: "1234",
-    },
-    {
-      title: "Etc",
-      description: "예시 데이터입니다",
-      dateRange: { startDate: "2024-01-12", endDate: "2024-04-25" },
-      image: "brand4.jpg", // 이미지 경로 추가
-      href: "1234",
-    },
-  ];
+  useTokenParam();
+  const {data,error} = useSubscribing();
+  {error && console.log(error)}
+  const brandList: string[] = [ 'OliveYoung','SSF','InterPark','Ediya'];
 
   // 팔로워의 브랜드 목록 데이터 (예시)
   const followerBrands: Product[] = [
@@ -89,29 +70,44 @@ const Main = () => {
       />
       <NavBar />
       <Section>
-        <Heading>000님이 구독 중인 브랜드</Heading>
-        <BrandList>
-          {dummyData.length > 0 ? (
+        { isLoggedIn && accessToken ? <Heading>구독 중인 브랜드</Heading> : <Heading>서비스 중인 브랜드</Heading> }
+        { isLoggedIn && accessToken ? <BrandList>
+          { data.length > 0 ? (  //추후에는 구독 중인 브랜드 리스트로 변경
             <CardWrapper>
-              {dummyData.map((brand) => (
-                <BrandCard key={brand.title}>
-                  <BrandImage src={brand.image} alt={brand.title} />
-                  <ItemList
+              {data.map((brand) => (
+                <BrandCard key={brand.id}>
+                  <BrandImage src={`/${brand.subedSiteName}.jpg`} alt={`/${brand.subedSiteName}.jpg`} />
+                  {/* <ItemList
                     image={brand.image}
                     title={brand.title}
                     dateRange={brand.dateRange}
                     href={brand.href}
                     description={brand.description}
-                  />
+                  /> */}
                 </BrandCard>
               ))}
             </CardWrapper>
           ) : (
             <NoBrandMessage>구독 중인 브랜드가 없습니다!</NoBrandMessage>
           )}
-        </BrandList>
+        </BrandList> : <BrandList>
+            <CardWrapper>
+              {brandList.map((brand) => (
+                <BrandCard key={brand}>
+                  <BrandImage src={`${brand}`} alt={`${brand}`} />
+                  {/* <ItemList
+                    image={brand.image}
+                    title={brand.title}
+                    dateRange={brand.dateRange}
+                    href={brand.href}
+                    description={brand.description}
+                  /> */}
+                </BrandCard>
+              ))}
+            </CardWrapper>
+        </BrandList> }
       </Section>
-      <Section>
+      { isLoggedIn && <Section>
         <Heading>000님이 팔로우 중인 000님이 구독 중인 브랜드</Heading>
         <BrandList>
           {followerBrands.length > 0 ? (
@@ -133,7 +129,7 @@ const Main = () => {
             <NoBrandMessage>팔로우 중인 브랜드가 없습니다!</NoBrandMessage>
           )}
         </BrandList>
-      </Section>
+      </Section>}
       <Board />
     </MainContainer>
   );

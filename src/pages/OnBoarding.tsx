@@ -4,6 +4,8 @@ import { Header } from "../stories/Header/Header";
 import { Button } from "../stories/Button/Button";
 import ItemList, { ItemListForInterPark, Product, InterPark } from "../stories/ItemList/ItemList";
 import { useEffect, useState } from "react";
+import { useRecoilState } from "recoil";
+import { ediya, interPark, oliveYoung, ssf } from "../recoil/atoms";
 
 const VITE_API_URL_OLIVEYOUNG = "https://snapevent.site/api/crawl/olive-young";
 const VITE_API_URL_INTERPARK = "https://snapevent.site/api/crawl/interpark";
@@ -13,13 +15,13 @@ const VITE_API_URL_EDIYA = "https://snapevent.site/api/crawl/ediya-coffee";
 const OnBoarding = () => {
   const navigate = useNavigate();
   const [isLoadingOliveYoung, setIsLoadingOliveYoung] = useState(true);
-  const [oliveYoungItem, setOliveYoungItem] = useState<Product[]>([]);
+  const [oliveYoungItem, setOliveYoungItem] = useRecoilState<Product[]>(oliveYoung);
   const [isLoadingInterPark, setIsLoadingInterPark] = useState(true);
-  const [interParkItem, setInterParkItem] = useState<InterPark[]>([]);
+  const [interParkItem, setInterParkItem] = useRecoilState<InterPark[]>(interPark);
   const [isLoadingSSF, setIsLoadingSSF] = useState(true);
-  const [SSFItem, setSSFItem] = useState<Product[]>([]);
+  const [SSFItem, setSSFItem] = useRecoilState<Product[]>(ssf);
   const [isLoadingEdiya, setIsLoadingEdiya] = useState(true);
-  const [ediyaItem, setEdiyaItem] = useState<Product[]>([]);
+  const [ediyaItem, setEdiyaItem] = useRecoilState<Product[]>(ediya);
 
   useEffect(() => {
     (async () => {

@@ -2,7 +2,7 @@ import { useRecoilValue } from "recoil";
 import isLoggedIn from "../../recoil/atoms";
 import { Button } from "../Button/Button";
 import "./header.css";
-
+import { useNavigate } from "react-router-dom";
 interface HeaderProps {
   onLogin?: () => void;
   onLogout?: () => void;
@@ -10,11 +10,18 @@ interface HeaderProps {
 
 export const Header = ({ onLogin, onLogout }: HeaderProps) => {
   const recoilIsLoggedIn = useRecoilValue(isLoggedIn);
+  const navigate = useNavigate();
   return (
     <header>
       <div className="storybook-header">
         <div>
-          <h1>SnapEvent</h1>
+          <h1
+            onClick={() => {
+              navigate("/main");
+            }}
+          >
+            SnapEvent
+          </h1>
         </div>
         <div>
           {recoilIsLoggedIn ? (

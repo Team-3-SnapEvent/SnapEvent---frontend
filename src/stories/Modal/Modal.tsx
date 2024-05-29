@@ -4,7 +4,9 @@ import { useState } from "react";
 import { Button } from "../Button/Button";
 import { useNavigate } from "react-router-dom";
 import joinIn, { joinData } from "../../apis/joinIn";
-import logIn, { logInData } from "../../apis/logIn";
+import useAuth, { logInData } from "../../apis/logIn";
+import isLoggedIn from "../../recoil/atoms";
+import { useSetRecoilState } from "recoil";
 
 interface ModalProps {
   title: string;
@@ -15,20 +17,18 @@ interface ModalProps {
 
 const Modal = ({ title, onLogIn, closeModal, checkDuplication }: ModalProps) => {
   const navigate = useNavigate();
+  const { logIn } = useAuth();
+  const setLoggedIn = useSetRecoilState(isLoggedIn);
   const [logInId, setLogInId] = useState("");
   const [logInPassword, setLogInPassword] = useState("");
   const [joinInId, setJoinInId] = useState("");
   const [joinInPassword, setJoinInPassword] = useState("");
   const [checkPassword, setCheckPassword] = useState("");
   const [nickname, setNickname] = useState("");
-  console.log(logInId);
-  console.log(logInPassword);
-  console.log(joinInId);
-  console.log(nickname);
 
   const logInData: logInData = {
     username: `${logInId}`,
-    userPassword: `${logInPassword}`,
+    password: `${logInPassword}`,
   };
 
   const joinInData: joinData = {
@@ -79,6 +79,8 @@ const Modal = ({ title, onLogIn, closeModal, checkDuplication }: ModalProps) => 
                     logIn(logInData);
                     setLogInId("");
                     setLogInPassword("");
+                    setLoggedIn(true);
+                    navigate("/main");
                   }}
                 />
               </Form>
@@ -143,7 +145,9 @@ const Modal = ({ title, onLogIn, closeModal, checkDuplication }: ModalProps) => 
                     setJoinInPassword("");
                     setCheckPassword("");
                     setNickname("");
-                    /*추후에 회원가입fullfilled되면 로그인까지 돼서 토큰 저장하는 과정 구현 */ navigate("main");
+                    logIn({ username: joinInData.username, password: joinInData.password });
+                    setLoggedIn(true);
+                    navigate("/main");
                   }}
                 />
               </Form>

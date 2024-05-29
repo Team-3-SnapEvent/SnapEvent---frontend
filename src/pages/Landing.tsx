@@ -13,6 +13,11 @@ const Landing = () => {
     navigate("/"); // 수정 필요 -> 로그인 과정 완료 시 작성.
   };
 
+  const handleShare = () => {
+    navigator.clipboard.writeText("https://snapevent.site");
+    alert(" 📋클립보드에 링크가 복사되었어요! 친구들에게 공유해보세요");
+  };
+
   return (
     <Container>
       <Header onLogin={onLogin} onLogout={onLogout} />
@@ -48,7 +53,13 @@ const Landing = () => {
           새로운 상품을 발견하세요.
         </Text>
         <ButtonWrapper>
-          <Button primary={false} label="공유하기" />
+          <Button
+            onClick={() => {
+              handleShare();
+            }}
+            primary={false}
+            label="공유하기"
+          />
         </ButtonWrapper>
       </Content>
     </Container>

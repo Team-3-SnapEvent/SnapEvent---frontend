@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Button } from "../stories/Button/Button";
 import useOpenModal from "../utils/useOpenModal";
 import Modal from "../stories/Modal/Modal";
-import socialLogIn, { socialKakao, socialNaver } from "../apis/socialLogIn";
+import useSocialLogIn from "../utils/useSocialLogIn";
 
 const LogIn = () => {
   const { isOpenModal, clickModal, closeModal } = useOpenModal();
@@ -15,7 +15,7 @@ const LogIn = () => {
       <Title>회원가입 또는 로그인하세요!</Title>
       <Description>스냅 이벤트의 다양한 서비스를 이용해보세요.</Description>
       <ButtonContainer>
-        <Button
+        <Button 
           primary={false}
           size="large"
           label="회원가입"
@@ -35,15 +35,15 @@ const LogIn = () => {
         />
       </ButtonContainer>
       <Line />
-      <KakaoWrapper onClick={socialKakao} >
-        <Image src="/kakao.png"/>
+      <KakaoWrapper onClick={()=>useSocialLogIn("https://snapevent.site/oauth2/authorization/kakao")} >
+        <Image src="/kakao.png"/> 
         <SocialText>카카오로 로그인</SocialText>
       </KakaoWrapper>
-      <NaverWrapper onClick={socialNaver} >
+      <NaverWrapper onClick={()=>useSocialLogIn("https://snapevent.site/oauth2/authorization/naver")} >
         <Image src="/naver.svg" />
         <SocialText>네이버로 로그인</SocialText>
       </NaverWrapper>
-      <GoogleWrapper onClick={socialLogIn} >
+      <GoogleWrapper onClick={()=>useSocialLogIn("https://snapevent.site/oauth2/authorization/google")} >
         <Image src="/google.png" />
         <SocialText>구글로 로그인</SocialText>
       </GoogleWrapper>

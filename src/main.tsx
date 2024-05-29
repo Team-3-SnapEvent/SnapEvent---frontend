@@ -1,12 +1,17 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App.tsx";
+import axios from "axios";
 import { RecoilRoot } from "recoil";
 
+import App from "./App.tsx";
+
+axios.defaults.baseURL = "https://snapevent.site";
+axios.defaults.withCredentials = true;
+
 ReactDOM.createRoot(document.getElementById("root")!).render(
-  <RecoilRoot>
-    <React.StrictMode>
+  <React.StrictMode>
+    <RecoilRoot>
       <App />
-    </React.StrictMode>
-  </RecoilRoot>
+    </RecoilRoot>
+  </React.StrictMode>
 );
