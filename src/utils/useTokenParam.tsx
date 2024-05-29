@@ -1,12 +1,13 @@
 import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useSetRecoilState } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import { accessToken } from "../recoil/atoms";
 
 const useTokenParam = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const setAccessToken = useSetRecoilState(accessToken);
+  const acessTOKEN = useRecoilValue(accessToken);
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
@@ -14,9 +15,9 @@ const useTokenParam = () => {
 
     if (token) {
       setAccessToken(token);
-      navigate("/main", { replace: true }); // URL에서 토큰 제거
+      navigate("/main", { replace: true });
     }
-  }, [location, setAccessToken, navigate]);
+  }, [location, setAccessToken, navigate, acessTOKEN]);
 
   return null;
 };
