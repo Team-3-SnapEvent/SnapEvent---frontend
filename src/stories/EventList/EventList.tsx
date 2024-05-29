@@ -4,7 +4,7 @@ import { Product, InterPark } from "../ItemList/ItemList";
 const EventList = ({ title, description, dateRange, image, href }: Product) => {
   return (
     <EventWrapper>
-      <EventImage src={image} />
+      <EventImage src={image} alt={title} />
       <EventTextWrapper>
         <EventTitle
           onClick={() => {
@@ -16,8 +16,8 @@ const EventList = ({ title, description, dateRange, image, href }: Product) => {
         </EventTitle>
         <EventDescription>{description}</EventDescription>
         <EventDateWrapper>
-          시작 날짜 : {dateRange.startDate} <br />
-          종료 날짜 : {dateRange.endDate}
+          시작 날짜: {dateRange.startDate} <br />
+          종료 날짜: {dateRange.endDate}
         </EventDateWrapper>
       </EventTextWrapper>
     </EventWrapper>
@@ -52,15 +52,6 @@ const EventWrapper = styled.div`
   align-items: center;
   display: flex;
   flex-direction: row;
-  margin-bottom: 20px;
-  overflow: hidden;
-  transition:
-    transform 0.2s,
-    box-shadow 0.2s;
-  &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-  }
 `;
 
 const EventTextWrapper = styled.div`
@@ -79,9 +70,9 @@ const EventImage = styled.img`
 
 const EventTitle = styled.div`
   font-size: 1.7rem;
-  color: white;
+  color: #333;
   font-weight: bold;
-`;
+`
 
 const EventDescription = styled.div`
   font-size: 1rem;
