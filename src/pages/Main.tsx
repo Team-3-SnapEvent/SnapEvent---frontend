@@ -19,7 +19,6 @@ const Main = () => {
   const brandList: string[] = ["OliveYoung", "SSFShop", "Interpark", "EdiyaCoffee"];
   const location = useLocation();
   const setAccessToken = useSetRecoilState(accessToken);
-  const acessTOKEN = useRecoilValue(accessToken);
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
@@ -29,7 +28,7 @@ const Main = () => {
       setAccessToken(token);
       navigate("/main", { replace: true });
     }
-  }, [location, setAccessToken, navigate, acessTOKEN]);
+  }, [location, setAccessToken, navigate]);
 
   // 팔로워의 브랜드 목록 데이터 (예시)
   const followerBrands: Product[] = [
