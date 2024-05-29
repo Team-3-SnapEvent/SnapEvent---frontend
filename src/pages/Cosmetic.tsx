@@ -2,11 +2,14 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { Header } from "../stories/Header/Header";
 import NavBar from "../stories/NavBar/NavBar";
-import { oliveYoung } from "../recoil/atoms";
+//import { oliveYoung } from "../recoil/atoms";
+//import { useEffect } from "react";
+//import { useRecoilValue } from "recoil";
 
 const Cosmetic = () => {
   const navigate = useNavigate();
-  console.log(oliveYoung);
+  //const crawledData = useRecoilValue(oliveYoung);
+
   return (
     <CosmeticContainer>
       <Header

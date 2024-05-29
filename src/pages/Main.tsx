@@ -11,13 +11,15 @@ import isLoggedIn, { accessToken } from "../recoil/atoms";
 //import getBoardingList from "../apis/getBoardingList";
 import useSubscribing from "../apis/getSubscribing";
 import useTokenParam from "../utils/useTokenParam";
+import { useRecoilValue } from "recoil";
 
 const Main = () => {
   const navigate = useNavigate();
   useTokenParam();
   const {data,error} = useSubscribing();
   {error && console.log(error)}
-  const brandList: string[] = [ 'OliveYoung','SSF','InterPark','Ediya'];
+  const isLogIn = useRecoilValue(isLoggedIn);
+  const brandList: string[] = [ 'OliveYoung','SSFShop','Interpark','EdiyaCoffee'];
 
   // 팔로워의 브랜드 목록 데이터 (예시)
   const followerBrands: Product[] = [
@@ -70,8 +72,8 @@ const Main = () => {
       />
       <NavBar />
       <Section>
-        { isLoggedIn && accessToken ? <Heading>구독 중인 브랜드</Heading> : <Heading>서비스 중인 브랜드</Heading> }
-        { isLoggedIn && accessToken ? <BrandList>
+        { isLogIn && accessToken ? <Heading>구독 중인 브랜드</Heading> : <Heading>서비스 중인 브랜드</Heading> }
+        { isLogIn && accessToken ? <BrandList>
           { data.length > 0 ? (  //추후에는 구독 중인 브랜드 리스트로 변경
             <CardWrapper>
               {data.map((brand) => (
@@ -94,7 +96,7 @@ const Main = () => {
             <CardWrapper>
               {brandList.map((brand) => (
                 <BrandCard key={brand}>
-                  <BrandImage src={`${brand}`} alt={`${brand}`} />
+                  <BrandImage src={`/${brand}.jpg`} alt={`/${brand}.jpg`} />
                   {/* <ItemList
                     image={brand.image}
                     title={brand.title}
@@ -107,7 +109,7 @@ const Main = () => {
             </CardWrapper>
         </BrandList> }
       </Section>
-      { isLoggedIn && <Section>
+      { isLogIn && <Section>
         <Heading>000님이 팔로우 중인 000님이 구독 중인 브랜드</Heading>
         <BrandList>
           {followerBrands.length > 0 ? (

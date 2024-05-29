@@ -13,17 +13,64 @@ import Clothes from "./pages/Clothes";
 //import useTokenParam from "./utils/useTokenParam";
 //import useAuth from "./apis/logIn";
 import { useEffect } from "react";
-import { RecoilRoot, useRecoilValue } from "recoil";
-import { accessToken } from "./recoil/atoms";
+import { RecoilRoot, useRecoilValue, useSetRecoilState } from "recoil";
+import { accessToken, ediya, interPark, oliveYoung, ssf } from "./recoil/atoms";
+import { InterPark, Product } from "./stories/ItemList/ItemList";
+
+
+const VITE_API_URL_OLIVEYOUNG = "https://snapevent.site/api/crawl/olive-young";
+const VITE_API_URL_INTERPARK = "https://snapevent.site/api/crawl/interpark";
+const VITE_API_URL_SSF = "https://snapevent.site/api/crawl/ssf-shop";
+const VITE_API_URL_EDIYA = "https://snapevent.site/api/crawl/ediya-coffee";
 
 const App = () => {
   const accessTOKEN = useRecoilValue(accessToken);
+  
+  const setOliveYoungItem = useSetRecoilState<Product[]>(oliveYoung);
+  const setInterParkItem = useSetRecoilState<InterPark[]>(interPark);
+  const setSSFItem = useSetRecoilState<Product[]>(ssf);
+  const setEdiyaItem = useSetRecoilState<Product[]>(ediya);
+
   //const { onSilentRefresh } = useAuth();
+
   useEffect(() => {
     //useTokenParam();
     console.log("access Token: ", accessTOKEN);
     //onSilentRefresh();
   }, [accessToken]);
+
+  useEffect(()=>{
+    (async () => {
+      const responseOliveYoung = await fetch(VITE_API_URL_OLIVEYOUNG);
+      const responseInterPark = await fetch(VITE_API_URL_INTERPARK);
+      const responseSSF = await fetch(VITE_API_URL_SSF);
+      const responseEdiya = await fetch(VITE_API_URL_EDIYA);
+
+      if (!responseOliveYoung.ok) {
+        throw new Error("API 호출 실패" + responseOliveYoung.statusText);
+      }
+      if (!responseInterPark.ok) {
+        throw new Error("API 호출 실패" + responseInterPark.statusText);
+      }
+      if (!responseSSF.ok) {
+        throw new Error("API 호출 실패" + responseSSF.statusText);
+      }
+      if (!responseEdiya.ok) {
+        throw new Error("API 호출 실패" + responseEdiya.statusText);
+      }
+      const jsonResponseOliveYoung = await responseOliveYoung.json();
+      setOliveYoungItem(jsonResponseOliveYoung);
+
+      const jsonResponseInterPark = await responseInterPark.json();
+      setInterParkItem(jsonResponseInterPark);
+
+      const jsonResponseSSF = await responseSSF.json();
+      setSSFItem(jsonResponseSSF);
+
+      const jsonResponseEdiya = await responseEdiya.json();
+      setEdiyaItem(jsonResponseEdiya);
+    })();
+  },[])
 
   return (
     <RecoilRoot>

@@ -215,6 +215,7 @@ const InputWrapper = styled.div`
 `;
 
 const Label = styled.label`
+  width: 100px;
   color: #333;
 `;
 
