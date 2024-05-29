@@ -24,19 +24,37 @@ const Cosmetic = () => {
       <NavBar />
       <BrandWrapper>
         <BrandName>올리브영 🫒</BrandName>
-        {oliveyoung.map((item)=>{return <EventList {...item} />})}
+        {oliveyoung.map((item) => {
+          return <EventList {...item} />;
+        })}
       </BrandWrapper>
     </CosmeticContainer>
   );
 };
 
-const CosmeticContainer = styled.div``;
-
-const BrandWrapper = styled.div``;
+const CosmeticContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+`;
+const BrandWrapper = styled.div`
+  width: 1200px;
+  max-width: 1200px;
+  background: #fff;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  margin-top: 20px;
+  margin-left: 35px;
+  padding: 50px;
+`;
 const BrandName = styled.h2`
   color: #333;
+  font-size: 2.5em;
+  text-align: left;
+  margin-bottom: 20px;
+  border-bottom: 3px solid #eee;
+  padding-left: 10px;
+  padding-bottom: 20px;
 `;
-
-
 
 export default Cosmetic;

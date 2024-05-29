@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 import { accessToken } from "../recoil/atoms";
-import {useSetRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
 import { useCallback } from "react";
 
 export interface logInData {
