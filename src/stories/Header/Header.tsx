@@ -26,7 +26,9 @@ export const Header = ({ onLogin, onLogout }: HeaderProps) => {
         <div>
           {recoilIsLoggedIn ? (
             <>
-              <span className="welcome">마이페이지</span>
+              <span onClick={() => navigate("/mypage")} className="welcome">
+                마이페이지
+              </span>
               <Button size="medium" onClick={onLogout} label="Log out" />
             </>
           ) : (
