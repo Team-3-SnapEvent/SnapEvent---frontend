@@ -52,6 +52,12 @@ const EventWrapper = styled.div`
   align-items: center;
   display: flex;
   flex-direction: row;
+  margin-bottom: 1vw;
+
+  &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  } 
 `;
 
 const EventTextWrapper = styled.div`
@@ -72,6 +78,10 @@ const EventTitle = styled.div`
   font-size: 1.7rem;
   color: #333;
   font-weight: bold;
+
+    &:hover {
+        color: #ff6f61;
+    }
 `;
 
 const EventDescription = styled.div`
