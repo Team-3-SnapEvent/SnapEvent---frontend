@@ -13,6 +13,7 @@ const Main = () => {
   const isLogIn = useRecoilValue(isLoggedIn);
   const brandList: string[] = ["OliveYoung", "SSFShop", "Interpark", "EdiyaCoffee"];
   const { data, error } = useSubscribing();
+  console.log(data);
   {
     error && console.log(error);
   }
