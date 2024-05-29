@@ -19,7 +19,7 @@ const useTokenParam = () => {
     }
   }, [location, setAccessToken, navigate, acessTOKEN]);
 
-  return null;
+  return [useEffect];
 };
 
 export default useTokenParam;

@@ -1,27 +1,35 @@
 import styled from "styled-components";
 import { Header } from "../stories/Header/Header";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import NavBar from "../stories/NavBar/NavBar";
 import ItemList, { Product } from "../stories/ItemList/ItemList";
 import Board from "../stories/Board/Board";
-
 import isLoggedIn, { accessToken } from "../recoil/atoms";
-//import { useEffect } from "react";
-//import GetSubscribing from "../apis/getSubscribing";
-//import getBoardingList from "../apis/getBoardingList";
 import useSubscribing from "../apis/getSubscribing";
-import useTokenParam from "../utils/useTokenParam";
-import { useRecoilValue } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { useEffect } from "react";
 
 const Main = () => {
   const navigate = useNavigate();
-  useTokenParam();
   const { data, error } = useSubscribing();
   {
     error && console.log(error);
   }
   const isLogIn = useRecoilValue(isLoggedIn);
   const brandList: string[] = ["OliveYoung", "SSFShop", "Interpark", "EdiyaCoffee"];
+  const location = useLocation();
+  const setAccessToken = useSetRecoilState(accessToken);
+  const acessTOKEN = useRecoilValue(accessToken);
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const token = params.get("accessToken");
+
+    if (token) {
+      setAccessToken(token);
+      navigate("/main", { replace: true });
+    }
+  }, [location, setAccessToken, navigate, acessTOKEN]);
 
   // 팔로워의 브랜드 목록 데이터 (예시)
   const followerBrands: Product[] = [

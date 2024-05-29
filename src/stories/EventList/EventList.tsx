@@ -72,7 +72,7 @@ const EventTitle = styled.div`
   font-size: 1.7rem;
   color: #333;
   font-weight: bold;
-`
+`;
 
 const EventDescription = styled.div`
   font-size: 1rem;
