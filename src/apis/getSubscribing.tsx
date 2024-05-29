@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { useRecoilValue } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import { accessToken } from "../recoil/atoms";
+import { useLocation, useNavigate } from "react-router-dom";
 
 interface subData {
   id: number;
@@ -9,15 +10,23 @@ interface subData {
 }
 
 const useSubscribing = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const setAccessToken = useSetRecoilState(accessToken);
   const stringAccessToken = useRecoilValue(accessToken);
   const [data, setData] = useState<subData[]>([]);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    if (stringAccessToken) {
+    const params = new URLSearchParams(location.search);
+    const token = params.get("accessToken");
+
+    if (token) {
+      setAccessToken(token);
+      navigate("/main", { replace: true });
       axios
         .get("/api/subs/showlist", {
-          headers: { Authorization: `Bearer ${stringAccessToken}` },
+          headers: { Authorization: `Bearer ${token}` },
         })
         .then((res) => {
           setData(res.data);
