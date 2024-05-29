@@ -10,8 +10,7 @@ import Cosmetic from "./pages/Cosmetic";
 import Cafe from "./pages/Cafe";
 import Concert from "./pages/Concert";
 import Clothes from "./pages/Clothes";
-//import useTokenParam from "./utils/useTokenParam";
-//import useAuth from "./apis/logIn";
+import useAuth from "./apis/logIn";
 import { useEffect } from "react";
 import { RecoilRoot, useRecoilValue, useSetRecoilState } from "recoil";
 import { accessToken, ediya, interPark, oliveYoung, ssf } from "./recoil/atoms";
@@ -31,12 +30,11 @@ const App = () => {
   const setSSFItem = useSetRecoilState<Product[]>(ssf);
   const setEdiyaItem = useSetRecoilState<Product[]>(ediya);
 
-  //const { onSilentRefresh } = useAuth();
+  const { onSilentRefresh } = useAuth();
 
   useEffect(() => {
-    //useTokenParam();
     console.log("access Token: ", accessTOKEN);
-    //onSilentRefresh();
+    onSilentRefresh();
   }, [accessToken]);
 
   useEffect(()=>{

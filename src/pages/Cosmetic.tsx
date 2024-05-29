@@ -2,13 +2,14 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { Header } from "../stories/Header/Header";
 import NavBar from "../stories/NavBar/NavBar";
-//import { oliveYoung } from "../recoil/atoms";
-//import { useEffect } from "react";
-//import { useRecoilValue } from "recoil";
+import { useRecoilValue } from "recoil";
+import { oliveYoung } from "../recoil/atoms";
+import { Product } from "../stories/ItemList/ItemList";
+import EventList from "../stories/EventList/EventList";
 
 const Cosmetic = () => {
   const navigate = useNavigate();
-  //const crawledData = useRecoilValue(oliveYoung);
+  const oliveyoung = useRecoilValue<Product[]>(oliveYoung);
 
   return (
     <CosmeticContainer>
@@ -23,6 +24,7 @@ const Cosmetic = () => {
       <NavBar />
       <BrandWrapper>
         <BrandName>올리브영 🫒</BrandName>
+        {oliveyoung.map((item)=>{return <EventList {...item} />})}
       </BrandWrapper>
     </CosmeticContainer>
   );
@@ -34,5 +36,7 @@ const BrandWrapper = styled.div``;
 const BrandName = styled.h2`
   color: #333;
 `;
+
+
 
 export default Cosmetic;

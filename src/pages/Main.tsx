@@ -74,7 +74,7 @@ const Main = () => {
       <Section>
         { isLogIn && accessToken ? <Heading>구독 중인 브랜드</Heading> : <Heading>서비스 중인 브랜드</Heading> }
         { isLogIn && accessToken ? <BrandList>
-          { data.length > 0 ? (  //추후에는 구독 중인 브랜드 리스트로 변경
+          { data.length > 0 ? ( 
             <CardWrapper>
               {data.map((brand) => (
                 <BrandCard key={brand.id}>
@@ -85,7 +85,7 @@ const Main = () => {
                     dateRange={brand.dateRange}
                     href={brand.href}
                     description={brand.description}
-                  /> */}
+                  /> */}   {/* 나중에 여기 알림 설정한 이벤트 리스트를 뜨게 할 겁니다..! */}
                 </BrandCard>
               ))}
             </CardWrapper>
@@ -175,10 +175,10 @@ const BrandCard = styled.div`
 `;
 
 const BrandImage = styled.img`
-  width: 200px; /* 이미지 크기 조절 */
+  width: 200px; 
   height: 200px;
   object-fit: cover;
-  border-radius: 10px; /* 이미지에 원하는 모양의 테두리 설정 */
+  border-radius: 10px;
 `;
 
 const NoBrandMessage = styled.p`
