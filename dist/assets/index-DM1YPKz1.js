@@ -373,6 +373,12 @@ Error generating stack: `+i.message+`
   align-items: center;
   display: flex;
   flex-direction: row;
+  margin-bottom: 1vw;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  }
 `,x0=O.div`
   display: flex;
   flex-direction: column;
@@ -387,6 +393,10 @@ Error generating stack: `+i.message+`
   font-size: 1.7rem;
   color: #333;
   font-weight: bold;
+
+  &:hover {
+    color: #ff6f61;
+  }
 `,aP=O.div`
   font-size: 1rem;
   color: #333;

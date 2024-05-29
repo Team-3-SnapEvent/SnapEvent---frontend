@@ -55,9 +55,9 @@ const EventWrapper = styled.div`
   margin-bottom: 1vw;
 
   &:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-  } 
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  }
 `;
 
 const EventTextWrapper = styled.div`
@@ -79,9 +79,9 @@ const EventTitle = styled.div`
   color: #333;
   font-weight: bold;
 
-    &:hover {
-        color: #ff6f61;
-    }
+  &:hover {
+    color: #ff6f61;
+  }
 `;
 
 const EventDescription = styled.div`
