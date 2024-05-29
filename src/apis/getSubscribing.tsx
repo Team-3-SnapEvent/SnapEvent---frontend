@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import { accessToken } from "../recoil/atoms";
+import isLoggedIn, { accessToken } from "../recoil/atoms";
 import { useLocation, useNavigate } from "react-router-dom";
 
 interface subData {
@@ -12,6 +12,7 @@ interface subData {
 const useSubscribing = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const setLogIn = useSetRecoilState(isLoggedIn);
   const setAccessToken = useSetRecoilState(accessToken);
   const stringAccessToken = useRecoilValue(accessToken);
   const [data, setData] = useState<subData[]>([]);
@@ -20,8 +21,8 @@ const useSubscribing = () => {
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     const token = params.get("accessToken");
-
     if (token) {
+      setLogIn(true);
       setAccessToken(token);
       navigate("/main", { replace: true });
       axios
