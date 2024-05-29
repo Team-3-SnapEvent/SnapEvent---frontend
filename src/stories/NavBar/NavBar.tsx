@@ -18,6 +18,7 @@ const NavBar = () => {
 const Wrapper = styled.div`
   margin: 0;
   width: 90vw;
+  min-width: 500px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -40,5 +41,9 @@ const Span = styled.span`
   margin-right: 1rem;
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
+
+  &:hover {
+    color: #ff6f61;
+  }
 `;
 export default NavBar;
