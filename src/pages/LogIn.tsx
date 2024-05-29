@@ -100,6 +100,12 @@ const Wrapper = styled.div`
   border-radius: 5px;
   margin-top: 0.5rem;
   position: relative;
+
+  &:hover {
+    color: #213547;
+    transform: scale(1.02);
+    transition: 0.1s ease-in-out;
+  }
 `;
 const KakaoWrapper = styled(Wrapper)`
   background-color: #fee500;
