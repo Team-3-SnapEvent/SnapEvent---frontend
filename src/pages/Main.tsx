@@ -16,10 +16,12 @@ import { useRecoilValue } from "recoil";
 const Main = () => {
   const navigate = useNavigate();
   useTokenParam();
-  const {data,error} = useSubscribing();
-  {error && console.log(error)}
+  const { data, error } = useSubscribing();
+  {
+    error && console.log(error);
+  }
   const isLogIn = useRecoilValue(isLoggedIn);
-  const brandList: string[] = [ 'OliveYoung','SSFShop','Interpark','EdiyaCoffee'];
+  const brandList: string[] = ["OliveYoung", "SSFShop", "Interpark", "EdiyaCoffee"];
 
   // 팔로워의 브랜드 목록 데이터 (예시)
   const followerBrands: Product[] = [
@@ -72,27 +74,31 @@ const Main = () => {
       />
       <NavBar />
       <Section>
-        { isLogIn && accessToken ? <Heading>구독 중인 브랜드</Heading> : <Heading>서비스 중인 브랜드</Heading> }
-        { isLogIn && accessToken ? <BrandList>
-          { data.length > 0 ? ( 
-            <CardWrapper>
-              {data.map((brand) => (
-                <BrandCard key={brand.id}>
-                  <BrandImage src={`/${brand.subedSiteName}.jpg`} alt={`/${brand.subedSiteName}.jpg`} />
-                  {/* <ItemList
+        {isLogIn && accessToken ? <Heading>구독 중인 브랜드</Heading> : <Heading>서비스 중인 브랜드</Heading>}
+        {isLogIn && accessToken ? (
+          <BrandList>
+            {data.length > 0 ? (
+              <CardWrapper>
+                {data.map((brand) => (
+                  <BrandCard key={brand.id}>
+                    <BrandImage src={`/${brand.subedSiteName}.jpg`} alt={`/${brand.subedSiteName}.jpg`} />
+                    {/* <ItemList
                     image={brand.image}
                     title={brand.title}
                     dateRange={brand.dateRange}
                     href={brand.href}
                     description={brand.description}
-                  /> */}   {/* 나중에 여기 알림 설정한 이벤트 리스트를 뜨게 할 겁니다..! */}
-                </BrandCard>
-              ))}
-            </CardWrapper>
-          ) : (
-            <NoBrandMessage>구독 중인 브랜드가 없습니다!</NoBrandMessage>
-          )}
-        </BrandList> : <BrandList>
+                  /> */}{" "}
+                    {/* 나중에 여기 알림 설정한 이벤트 리스트를 뜨게 할 겁니다..! */}
+                  </BrandCard>
+                ))}
+              </CardWrapper>
+            ) : (
+              <NoBrandMessage>구독 중인 브랜드가 없습니다!</NoBrandMessage>
+            )}
+          </BrandList>
+        ) : (
+          <BrandList>
             <CardWrapper>
               {brandList.map((brand) => (
                 <BrandCard key={brand}>
@@ -107,31 +113,34 @@ const Main = () => {
                 </BrandCard>
               ))}
             </CardWrapper>
-        </BrandList> }
+          </BrandList>
+        )}
       </Section>
-      { isLogIn && <Section>
-        <Heading>000님이 팔로우 중인 000님이 구독 중인 브랜드</Heading>
-        <BrandList>
-          {followerBrands.length > 0 ? (
-            <CardWrapper>
-              {followerBrands.map((brand) => (
-                <BrandCard key={brand.title}>
-                  <BrandImage src={brand.image} alt={brand.title} />
-                  <ItemList
-                    image={brand.image}
-                    title={brand.title}
-                    dateRange={brand.dateRange}
-                    href={brand.href}
-                    description={brand.description}
-                  />
-                </BrandCard>
-              ))}
-            </CardWrapper>
-          ) : (
-            <NoBrandMessage>팔로우 중인 브랜드가 없습니다!</NoBrandMessage>
-          )}
-        </BrandList>
-      </Section>}
+      {isLogIn && (
+        <Section>
+          <Heading>000님이 팔로우 중인 000님이 구독 중인 브랜드</Heading>
+          <BrandList>
+            {followerBrands.length > 0 ? (
+              <CardWrapper>
+                {followerBrands.map((brand) => (
+                  <BrandCard key={brand.title}>
+                    <BrandImage src={brand.image} alt={brand.title} />
+                    <ItemList
+                      image={brand.image}
+                      title={brand.title}
+                      dateRange={brand.dateRange}
+                      href={brand.href}
+                      description={brand.description}
+                    />
+                  </BrandCard>
+                ))}
+              </CardWrapper>
+            ) : (
+              <NoBrandMessage>팔로우 중인 브랜드가 없습니다!</NoBrandMessage>
+            )}
+          </BrandList>
+        </Section>
+      )}
       <Board />
     </MainContainer>
   );
@@ -175,7 +184,7 @@ const BrandCard = styled.div`
 `;
 
 const BrandImage = styled.img`
-  width: 200px; 
+  width: 200px;
   height: 200px;
   object-fit: cover;
   border-radius: 10px;

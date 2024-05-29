@@ -16,7 +16,6 @@ import { RecoilRoot, useRecoilValue, useSetRecoilState } from "recoil";
 import { accessToken, ediya, interPark, oliveYoung, ssf } from "./recoil/atoms";
 import { InterPark, Product } from "./stories/ItemList/ItemList";
 
-
 const VITE_API_URL_OLIVEYOUNG = "https://snapevent.site/api/crawl/olive-young";
 const VITE_API_URL_INTERPARK = "https://snapevent.site/api/crawl/interpark";
 const VITE_API_URL_SSF = "https://snapevent.site/api/crawl/ssf-shop";
@@ -24,7 +23,7 @@ const VITE_API_URL_EDIYA = "https://snapevent.site/api/crawl/ediya-coffee";
 
 const App = () => {
   const accessTOKEN = useRecoilValue(accessToken);
-  
+
   const setOliveYoungItem = useSetRecoilState<Product[]>(oliveYoung);
   const setInterParkItem = useSetRecoilState<InterPark[]>(interPark);
   const setSSFItem = useSetRecoilState<Product[]>(ssf);
@@ -37,7 +36,7 @@ const App = () => {
     onSilentRefresh();
   }, [accessToken]);
 
-  useEffect(()=>{
+  useEffect(() => {
     (async () => {
       const responseOliveYoung = await fetch(VITE_API_URL_OLIVEYOUNG);
       const responseInterPark = await fetch(VITE_API_URL_INTERPARK);
@@ -68,7 +67,7 @@ const App = () => {
       const jsonResponseEdiya = await responseEdiya.json();
       setEdiyaItem(jsonResponseEdiya);
     })();
-  },[])
+  }, []);
 
   return (
     <RecoilRoot>

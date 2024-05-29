@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 import { accessToken } from "../recoil/atoms";
-import {useSetRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
 import { useCallback } from "react";
 
 export interface logInData {
@@ -73,7 +73,7 @@ const useAuth = () => {
       .post("/api/members/reissue")
       .then(onLogInSuccess)
       .then(() => console.log("토큰재발급 완료"))
-      .catch((error) => console.log(error));
+      .catch((error) => console.log("토큰 재발급 오류" + error));
   }, [onLogInSuccess]);
 
   return { logIn, onSilentRefresh };

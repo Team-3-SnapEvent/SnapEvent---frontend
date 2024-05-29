@@ -1,30 +1,32 @@
 import styled from "styled-components";
-
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "../Button/Button";
 import { useNavigate } from "react-router-dom";
 import joinIn, { joinData } from "../../apis/joinIn";
 import useAuth, { logInData } from "../../apis/logIn";
-import isLoggedIn from "../../recoil/atoms";
-import { useSetRecoilState } from "recoil";
+import isLoggedIn, { accessToken } from "../../recoil/atoms";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import useCheckDuplication from "../../utils/useCheckDuplication";
 
 interface ModalProps {
   title: string;
   onLogIn?: boolean;
   closeModal: () => void;
-  checkDuplication?: () => void;
 }
 
-const Modal = ({ title, onLogIn, closeModal, checkDuplication }: ModalProps) => {
+const Modal = ({ title, onLogIn, closeModal }: ModalProps) => {
   const navigate = useNavigate();
   const { logIn } = useAuth();
   const setLoggedIn = useSetRecoilState(isLoggedIn);
-  const [logInId, setLogInId] = useState("");
-  const [logInPassword, setLogInPassword] = useState("");
-  const [joinInId, setJoinInId] = useState("");
-  const [joinInPassword, setJoinInPassword] = useState("");
-  const [checkPassword, setCheckPassword] = useState("");
-  const [nickname, setNickname] = useState("");
+  const accessTOKEN = useRecoilValue<string>(accessToken);
+  const [logInId, setLogInId] = useState<string>("");
+  const [logInPassword, setLogInPassword] = useState<string>("");
+  const [joinInId, setJoinInId] = useState<string>("");
+  const [joinInPassword, setJoinInPassword] = useState<string>("");
+  const [checkPassword, setCheckPassword] = useState<string>("");
+  const [nickname, setNickname] = useState<string>("");
+
+  const [isDuplicate, checkDuplication] = useCheckDuplication();
 
   const logInData: logInData = {
     username: `${logInId}`,
@@ -36,6 +38,41 @@ const Modal = ({ title, onLogIn, closeModal, checkDuplication }: ModalProps) => 
     password: `${joinInPassword}`,
     checkPassword: `${checkPassword}`,
     nickname: `${nickname}`,
+  };
+
+  useEffect(() => {
+    if (accessTOKEN !== "") {
+      setLoggedIn(true);
+      navigate("/main");
+    }
+  }, [accessTOKEN]);
+
+  const AfterLogIn = () => {
+    alert("로그인 되었습니다..!");
+  };
+
+  const handleLogIn = async (logInData: logInData) => {
+    try {
+      await logIn(logInData);
+      AfterLogIn();
+    } catch (error) {
+      console.error("로그인 중 오류가 발생했습니다:", error);
+    }
+  };
+
+  const handleJoinAndLogin = async () => {
+    if (isDuplicate === true) {
+      alert("중복된 닉네임을 입력하였습니다. 닉네임 수정 후 다시 시도해주세요:)");
+    } else if (isDuplicate === null) {
+      alert("닉네임을 입력하고 중복 확인 버튼을 눌러주세요:)");
+    } else {
+      try {
+        await joinIn(joinInData);
+        await handleLogIn({ username: joinInId, password: joinInPassword });
+      } catch (error) {
+        console.error("회원가입 또는 로그인 중 오류가 발생했습니다:", error);
+      }
+    }
   };
 
   return (
@@ -75,12 +112,8 @@ const Modal = ({ title, onLogIn, closeModal, checkDuplication }: ModalProps) => 
                   primary={true}
                   size="medium"
                   label="로그인"
-                  onClick={() => {
-                    logIn(logInData);
-                    setLogInId("");
-                    setLogInPassword("");
-                    setLoggedIn(true);
-                    navigate("/main");
+                  onClick={async () => {
+                    await handleLogIn(logInData);
                   }}
                 />
               </Form>
@@ -111,7 +144,7 @@ const Modal = ({ title, onLogIn, closeModal, checkDuplication }: ModalProps) => 
                   />
                 </InputWrapper>
                 <InputWrapper>
-                  <Label htmlFor="CHECKPASSWORD"> CHECK PASSWORD</Label>
+                  <Label htmlFor="CHECKPASSWORD">CHECK PASSWORD</Label>
                   <Input
                     id="CHECKPASSWORD"
                     name="checkPassword"
@@ -132,24 +165,19 @@ const Modal = ({ title, onLogIn, closeModal, checkDuplication }: ModalProps) => 
                       setNickname(e.target.value);
                     }}
                   />
-                  <Button primary={false} size="small" label="중복 확인" onClick={checkDuplication} />
+                  <Button
+                    primary={false}
+                    size="small"
+                    label="중복 확인"
+                    onClick={() => {
+                      checkDuplication(nickname);
+                    }}
+                  />
+                  {isDuplicate !== null && (
+                    <div>{isDuplicate === true ? "닉네임이 이미 사용 중입니다." : "닉네임 사용 가능합니다."}</div>
+                  )}
                 </InputWrapper>
-                <Button
-                  primary={true}
-                  label="회원가입"
-                  size="medium"
-                  onClick={() => {
-                    console.log(joinInData);
-                    joinIn(joinInData);
-                    setJoinInId("");
-                    setJoinInPassword("");
-                    setCheckPassword("");
-                    setNickname("");
-                    logIn({ username: joinInData.username, password: joinInData.password });
-                    setLoggedIn(true);
-                    navigate("/main");
-                  }}
-                />
+                <Button primary={true} label="회원가입" size="medium" onClick={handleJoinAndLogin} />
               </Form>
             </>
           )}
@@ -225,4 +253,5 @@ const Input = styled.input`
   border-radius: 5px;
   border-color: #7a7a7a;
 `;
+
 export default Modal;

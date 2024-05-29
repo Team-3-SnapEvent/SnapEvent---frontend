@@ -4,8 +4,8 @@ import { useRecoilValue } from "recoil";
 import { accessToken } from "../recoil/atoms";
 
 interface subData {
-  id: number,
-  subedSiteName: string
+  id: number;
+  subedSiteName: string;
 }
 
 const useSubscribing = () => {
@@ -15,29 +15,25 @@ const useSubscribing = () => {
 
   useEffect(() => {
     if (stringAccessToken) {
-      axios.get('/api/subs/showlist', {
-        headers: { Authorization: `Bearer ${stringAccessToken}` },
-      })
-      .then((res) => {
-        setData(res.data);
-        console.log(res.data);
-      })
-      .catch((err) => {
-        setError(err);
-        console.log(err);
-      });
+      axios
+        .get("/api/subs/showlist", {
+          headers: { Authorization: `Bearer ${stringAccessToken}` },
+        })
+        .then((res) => {
+          setData(res.data);
+          console.log(res.data);
+        })
+        .catch((err) => {
+          setError(err);
+          console.log(err);
+        });
     }
   }, [stringAccessToken]);
 
-  return { data , error };
+  return { data, error };
 };
 
 export default useSubscribing;
-
-
-
-
-
 
 /*
 import axios from "axios";

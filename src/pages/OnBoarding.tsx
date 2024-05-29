@@ -10,7 +10,7 @@ const OnBoarding = () => {
   const navigate = useNavigate();
   const oliveYoungItem = useRecoilValue<Product[]>(oliveYoung);
   const interParkItem = useRecoilValue<InterPark[]>(interPark);
-  const SSFItem= useRecoilValue<Product[]>(ssf);
+  const SSFItem = useRecoilValue<Product[]>(ssf);
   const ediyaItem = useRecoilValue<Product[]>(ediya);
 
   return (
@@ -29,9 +29,9 @@ const OnBoarding = () => {
             <Label htmlFor="subscribe-cosmetics">Oliveyoung 구독하기</Label>
           </CheckBoxContainer>
           <ItemWrapper>
-            {
-              oliveYoungItem.map((it) => <ItemList key={it.title} {...it} />)
-            }
+            {oliveYoungItem.map((it) => (
+              <ItemList key={it.title} {...it} />
+            ))}
           </ItemWrapper>
           <Category> 🎬 공연/티켓 🎤 </Category>
           <CheckBoxContainer>
@@ -39,9 +39,9 @@ const OnBoarding = () => {
             <Label htmlFor="subscribe-cosmetics">Interpark 구독하기</Label>
           </CheckBoxContainer>
           <ItemWrapper>
-            {
-              interParkItem.map((it) => <ItemListForInterPark key={it.title} {...it} />)
-            }
+            {interParkItem.map((it) => (
+              <ItemListForInterPark key={it.title} {...it} />
+            ))}
           </ItemWrapper>
           <Category> 🧵 의류 🧶 </Category>
           <CheckBoxContainer>
@@ -49,7 +49,9 @@ const OnBoarding = () => {
             <Label htmlFor="subscribe-cosmetics">SSF 구독하기</Label>
           </CheckBoxContainer>
           <ItemWrapper>
-            {SSFItem.map((it) => <ItemList {...it} />)}
+            {SSFItem.map((it) => (
+              <ItemList {...it} />
+            ))}
           </ItemWrapper>
           <Category> ☕ 카페 🍰 </Category>
           <CheckBoxContainer>
@@ -57,9 +59,9 @@ const OnBoarding = () => {
             <Label htmlFor="subscribe-cosmetics">Ediya 구독하기</Label>
           </CheckBoxContainer>
           <ItemWrapper>
-            {
-              ediyaItem.map((it) => <ItemList key={it.title} {...it} />)
-            }
+            {ediyaItem.map((it) => (
+              <ItemList key={it.title} {...it} />
+            ))}
           </ItemWrapper>
         </Items>
         <ButtonWrapper>

@@ -1,4 +1,4 @@
-const APIURL = "https://snapevent.site/api/members/join";
+import axios from "axios";
 
 export interface joinData {
   username: string;
@@ -7,22 +7,20 @@ export interface joinData {
   nickname: string;
 }
 
-type join = (userData: joinData) => void;
-
-const joinIn: join = async (userData: joinData) => {
-  const joinResponse = await fetch(APIURL, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(userData),
-  });
-  if (!joinResponse.ok) {
-    throw new Error("API 통신 오류" + joinResponse.statusText);
-  }
-  const jsonJoinResponse = joinResponse.json();
-  console.log(jsonJoinResponse);
-  return;
+const joinIn = async (userData: joinData) => {
+  await axios
+    .post("/api/members/join", userData)
+    .then((res) => {
+      if (res.status === 200) {
+        alert("회원가입이 완료되었습니다:)");
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+      if (err.response.status === 500) {
+        alert(err.response.data);
+      }
+    });
 };
 
 export default joinIn;
