@@ -14,6 +14,12 @@
   margin: 0.3rem 0 0.3rem 1rem;
   display: inline-block;
   vertical-align: top;
+
+  &:hover {
+    color: #ff6f61;
+    transform: scale(1.1);
+    transition: .3s ease-in-out;
+  }
 }
 
 .storybook-header button + button {

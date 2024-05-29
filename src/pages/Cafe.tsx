@@ -38,14 +38,14 @@ const CosmeticContainer = styled.div`
   padding: 2rem;
 `;
 const BrandWrapper = styled.div`
-  width: 1200px;
-  max-width: 1200px;
+  width: 79vw;
+  min-width: 400px;
   background: #fff;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
   border-radius: 5px;
   margin-top: 20px;
   margin-left: 35px;
-  padding: 50px;
+  padding: 3vw;
 `;
 const BrandName = styled.h2`
   color: #333;

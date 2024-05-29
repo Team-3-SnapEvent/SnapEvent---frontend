@@ -8,6 +8,12 @@
   line-height: 1;
   margin: 0.5rem;
   white-space: nowrap;
+
+  &:hover {
+    color: #213547;
+    transform: scale(1.05);
+    transition: .3s ease-in-out;
+  }
 }
 .storybook-button--primary {
   color: white;

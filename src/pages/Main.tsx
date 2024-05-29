@@ -165,7 +165,8 @@ const BrandList = styled.div`
   overflow-x: auto;
   padding-bottom: 1rem;
   margin-left: 3.7rem;
-  max-width: 1300px;
+  max-width: 80vw;
+  min-width: 400px;
 `;
 
 const CardWrapper = styled.div`
@@ -173,8 +174,10 @@ const CardWrapper = styled.div`
 `;
 
 const BrandCard = styled.div`
-  width: 400px;
-  height: 300px;
+  width: 20vw;
+  min-width: 200px;
+  height: 15vw;
+  min-height: 150px;
   margin: 1rem;
   padding: 1rem;
   border-radius: 10px;
@@ -184,8 +187,10 @@ const BrandCard = styled.div`
 `;
 
 const BrandImage = styled.img`
-  width: 200px;
-  height: 200px;
+  width: 20vw;
+  min-width: 200px;
+  height: 15vw;
+  min-height: 150px;
   object-fit: cover;
   border-radius: 10px;
 `;
